@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nine Arch Bridge Activities | Tourism Sri Lanka</title>
+  <link rel="icon" type="image/png" href="../favicon_io/favicon.png?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {margin:0;font-family:'Inter',sans-serif;background:#f7fafd;color:#222;line-height:1.7;}
+    .hero {background:url('images/Sri-Lanka.jpg') center/cover no-repeat;height:480px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;}
+    .hero:before {content:'';position:absolute;inset:0;background:rgba(10,18,28,0.52);z-index:1;}
+    .hero-content {position:relative;z-index:2;max-width:700px;}
+    .hero h1 {font-family:'Playfair Display',serif;font-size:3.2rem;color:#fff;margin-bottom:22px;letter-spacing:-1.5px;}
+    .hero p {color:#f3f3f3;font-size:1.25rem;margin-bottom:38px;}
+    .hero .hero-btns {display:flex;gap:24px;justify-content:center;}
+    .hero .hero-btns a {padding:15px 38px;border-radius:10px;font-weight:600;font-size:1.08rem;text-decoration:none;transition:.2s;box-shadow:0 2px 8px rgba(10,18,28,0.08);}
+    .hero .hero-btns .primary {background:#ff914d;color:#fff;}
+    .hero .hero-btns .primary:hover {background:#ffb37a;}
+    .hero .hero-btns .secondary {background:#fff;color:#1a3557;border:1.5px solid #ff914d;}
+    .hero .hero-btns .secondary:hover {background:#f7fafd;}
+    .section {padding:64px 0 56px 0;}
+    .section .section-title {font-family:'Playfair Display',serif;font-size:2.2rem;color:#1a3557;text-align:center;margin-bottom:22px;letter-spacing:-1px;}
+    .section .section-desc {text-align:center;color:#444;font-size:1.15rem;margin-bottom:44px;}
+    .card-row {display:flex;justify-content:center;gap:40px;flex-wrap:wrap;}
+    .card {background:#fff;border-radius:22px;box-shadow:0 6px 32px rgba(0,0,0,0.09);overflow:hidden;width:260px;transition:.2s;display:flex;flex-direction:column;align-items:center;min-height:370px;}
+    .card img {width:100%;height:180px;object-fit:cover;}
+    .card .card-title {font-size:1.22rem;font-weight:600;color:#1a3557;margin:22px 0 10px;letter-spacing:-0.5px;}
+    .card .card-desc {color:#555;font-size:1.05rem;margin-bottom:22px;text-align:center;padding:0 12px;}
+    .card:hover {box-shadow:0 12px 40px rgba(255,145,77,0.15);transform:translateY(-6px) scale(1.04);}
+    .info-row {display:flex;justify-content:center;gap:40px;margin:56px 0 0 0;flex-wrap:wrap;}
+    .info-box {background:#f3f6fa;border-radius:18px;padding:38px 32px;min-width:260px;max-width:340px;flex:1;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,0.05);}
+    .info-box .info-title {font-weight:700;color:#1a3557;margin-bottom:12px;font-size:1.13rem;}
+    .info-box .info-desc {color:#444;font-size:1.05rem;}
+    @media(max-width:1100px){.card-row,.info-row{gap:24px;}.card{width:220px;min-height:320px;}.info-box{min-width:200px;max-width:300px;padding:28px 16px;}}
+    @media(max-width:900px){.card-row,.info-row{flex-direction:column;align-items:center;gap:28px;}}
+    @media(max-width:600px){.hero{height:320px;}.hero h1{font-size:2rem;}.section{padding:28px 0;}.card{width:90vw;max-width:320px;min-height:220px;}.info-box{padding:18px 8px;}}
+  </style>
+</head>
+<body>
+
+    <header style="width:100%;background:#f8f2fc;padding:10px 0;display:flex;justify-content:space-between;align-items:center;">
+    <div style="margin-left:36px;">
+      <span style="font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;letter-spacing:0.5px;">
+        <span style="color:#174c3c;">Tourism In</span>
+        <span style="color:#e2b13c;"> Sri Lanka</span>
+      </span>
+    </div>
+    <nav style="display:flex;gap:16px;margin-right:36px;">
+      <a href="../index.html" style="font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:500;color:#222;text-decoration:none;padding:6px 18px;border-radius:18px;background:#f3ecfa;">Home</a>
+      <a href="../sections/destinations.html" style="font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:500;color:#222;text-decoration:none;padding:6px 18px;border-radius:18px;background:#f3ecfa;">Destination</a>
+      <a href="../sections/articles.html" style="font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:500;color:#222;text-decoration:none;padding:6px 18px;border-radius:18px;background:#f3ecfa;">Article</a>
+      <a href="#" style="font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:500;color:#222;text-decoration:none;padding:6px 18px;border-radius:18px;background:#f3ecfa;">About Us</a>
+      <a href="#footer" style="font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:500;color:#222;text-decoration:none;padding:6px 18px;border-radius:18px;background:#f3ecfa;">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Nine Arch Bridge, Ella</h1>
+      <p>Stand before Sri Lanka's most iconic colonial railway viaduct — nine towering stone arches framed by dense jungle, with the Kandy–Ella express rolling through at least three times a day.</p>
+      <div class="hero-btns">
+        <a href="https://www.srilanka.travel/ella" class="primary" target="_blank" rel="noopener">Explore Ella</a>
+        <a href="https://www.google.com/maps/search/Nine+Arch+Bridge+Ella+Sri+Lanka" class="secondary" target="_blank" rel="noopener">View on Map</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Find Your Vibe</div>
+    <div class="section-desc">The Nine Arch Bridge is the anchor of a perfect Ella day — combine photography viewpoints with jungle walks, a train ride over the bridge, and the surrounding hill country highlights.</div>
+    <div class="card-row">
+
+      <a class="card" href="nab-photography.html" style="text-decoration:none;color:inherit;">
+        <img src="images/Sri-Lanka.jpg" alt="Photography and Viewpoints at Nine Arch Bridge">
+        <div class="card-title">Photography &amp; Viewpoints</div>
+        <div class="card-desc">Capture the bridge from multiple angles — upper jungle path, lower field, and the classic arch shot.</div>
+        <ul style="margin:0 0 18px 0;padding:0 0 0 18px;text-align:left;font-size:0.98rem;color:#3a3a3a;">
+          <li><strong>Highlights:</strong></li>
+          <li>Main Viewpoint Platform</li>
+          <li>Upper Jungle Path Shot</li>
+          <li>Train Passing Moment</li>
+          <li>Golden Hour &amp; Misty Morning</li>
+        </ul>
+      </a>
+
+      <a class="card" href="nab-train-ride.html" style="text-decoration:none;color:inherit;">
+        <img src="images/top-6-awe-inspiring-hikes-in-sri-lanka-slider-2.jpg" alt="Train Ride over the Nine Arch Bridge">
+        <div class="card-title">Ride the Train Over</div>
+        <div class="card-desc">Board the Kandy–Ella train and cross the nine arches yourself for a view from above.</div>
+        <ul style="margin:0 0 18px 0;padding:0 0 0 18px;text-align:left;font-size:0.98rem;color:#3a3a3a;">
+          <li><strong>Highlights:</strong></li>
+          <li>Kandy to Ella Train Crossing</li>
+          <li>Open Doorway Experience</li>
+          <li>Demodara Loop Tunnel</li>
+          <li>Ella to Demodara Walk</li>
+        </ul>
+      </a>
+
+      <a class="card" href="nab-jungle-walks.html" style="text-decoration:none;color:inherit;">
+        <img src="images/national-parks.webp" alt="Jungle Walks around the Nine Arch Bridge">
+        <div class="card-title">Jungle Walks &amp; Trails</div>
+        <div class="card-desc">Paths around the bridge wind through dense jungle with tea estate edges and hidden valley views.</div>
+        <ul style="margin:0 0 18px 0;padding:0 0 0 18px;text-align:left;font-size:0.98rem;color:#3a3a3a;">
+          <li><strong>Highlights:</strong></li>
+          <li>Bridge Jungle Loop Trail</li>
+          <li>Tea Estate Edge Walk</li>
+          <li>Demodara Village Path</li>
+          <li>Birdwatching in the Canopy</li>
+        </ul>
+      </a>
+
+      <a class="card" href="nab-combine-ella.html" style="text-decoration:none;color:inherit;">
+        <img src="images/culture and experince.jpg" alt="Combine with Ella Activities">
+        <div class="card-title">Combine with Ella</div>
+        <div class="card-desc">Pair the bridge with Little Adam's Peak, Ravana Falls, and Ella town for a complete day.</div>
+        <ul style="margin:0 0 18px 0;padding:0 0 0 18px;text-align:left;font-size:0.98rem;color:#3a3a3a;">
+          <li><strong>Highlights:</strong></li>
+          <li>Little Adam's Peak Hike</li>
+          <li>Ravana Falls Swim</li>
+          <li>Ella Rock Full-Day Route</li>
+          <li>Ella Town Cafés &amp; Market</li>
+        </ul>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="section" style="background:#eaf3fa;">
+    <div class="section-title">Plan Your Visit</div>
+    <div class="section-desc">Insider tips for getting the best from the Nine Arch Bridge — train timings, photography, and the perfect full-day combo.</div>
+    <div class="info-row">
+      <div class="info-box">
+        <div class="info-title">Best Photography Times</div>
+        <div class="info-desc">Arrive between 9–10 AM for the best morning light. The 6:47 AM and 9:45 AM trains from Ella are the most photographed — check Sri Lanka Railways schedules before visiting.</div>
+      </div>
+      <div class="info-box">
+        <div class="info-title">Getting There</div>
+        <div class="info-desc">A 10-minute tuk-tuk ride from Ella town or a 30-minute walk along the railway track. Take the upper jungle path for the classic full-arch viewpoint shot.</div>
+      </div>
+      <div class="info-box">
+        <div class="info-title">Combine Your Day</div>
+        <div class="info-desc">Start with a sunrise hike on Little Adam's Peak, visit the bridge mid-morning for the train crossing, then cool off at Ravana Falls in the afternoon.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#222;padding:60px 8vw 0;color:#ccc;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;max-width:1600px;margin:0 auto;">
+      <div>
+        <h4 style="color:#fff;margin-bottom:12px;font-family:'Playfair Display',serif;font-size:1.15rem;">About Sri Lanka</h4>
+        <p style="font-size:1rem;line-height:1.7;">Sri Lanka is a tropical paradise offering rich culture, wildlife adventures, scenic landscapes, and unforgettable experiences.</p>
+      </div>
+      <div>
+        <h4 style="color:#fff;margin-bottom:12px;font-family:'Playfair Display',serif;font-size:1.15rem;">Quick Links</h4>
+        <ul style="list-style:none;padding:0;margin:0;">
+          <li style="margin-bottom:6px;"><a href="../index.html" style="color:#ccc;text-decoration:none;font-size:1rem;">Home</a></li>
+          <li style="margin-bottom:6px;"><a href="#" style="color:#ccc;text-decoration:none;font-size:1rem;">About Us</a></li>
+          <li style="margin-bottom:6px;"><a href="destinations.html" style="color:#ccc;text-decoration:none;font-size:1rem;">Destinations</a></li>
+          <li style="margin-bottom:6px;"><a href="#" style="color:#ccc;text-decoration:none;font-size:1rem;">Activities</a></li>
+          <li><a href="#" style="color:#ccc;text-decoration:none;font-size:1rem;">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:#fff;margin-bottom:12px;font-family:'Playfair Display',serif;font-size:1.15rem;">Contact Info</h4>
+        <p style="font-size:1rem;line-height:1.7;">Email: <a href="mailto:info@tourismsrilanka.com" style="color:#ccc;">info@tourismsrilanka.com</a><br>Phone: +94 78 123 4567</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;font-size:13px;color:#aaa;padding-bottom:24px;">© 2026 Tourism Sri Lanka. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>

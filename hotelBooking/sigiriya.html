@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotels in Sigiriya | Tourism In Sri Lanka</title>
+  <link rel="icon" type="image/png" href="../favicon_io/favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="destination-hotels.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-left">
+      <span class="logo-text">
+        <span class="logo-green">Tourism In</span>
+        <span class="logo-gold"> Sri Lanka</span>
+      </span>
+    </div>
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../sections/destinations.html">Destination</a>
+      <a href="../sections/articles.html">Article</a>
+      <a href="#">About Us</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+
+  <main class="dest-hotels-page">
+
+    <!-- HERO -->
+    <section class="dest-hero" style="background-image: url('../images_desitinations/image-place-1.jpg');">
+      <div class="dest-hero-overlay"></div>
+      <div class="dest-hero-content">
+        <p class="dest-hero-eyebrow">Central Province · Matale District</p>
+        <h1>Hotels &amp; Stays in <span class="accent">Sigiriya</span></h1>
+        <p class="dest-hero-sub">From rock-view boutique hotels to jungle eco-lodges — find your stay near the ancient fortress.</p>
+      </div>
+
+      <div class="dest-search-wrap">
+        <div class="dest-search-card">
+          <div class="dest-search-fields">
+            <div class="field">
+              <label>Location</label>
+              <div class="field-pill">Sigiriya, Sri Lanka</div>
+            </div>
+            <div class="field">
+              <label>Check In</label>
+              <div class="field-pill">05 Dec, 2025</div>
+            </div>
+            <div class="field">
+              <label>Check Out</label>
+              <div class="field-pill">10 Dec, 2025</div>
+            </div>
+            <div class="field">
+              <label>Travellers</label>
+              <div class="field-pill">2 Adults, 1 Room</div>
+            </div>
+            <button type="button" class="dest-search-btn">Search</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTERS -->
+    <section class="dest-filters" aria-label="Hotel filters">
+      <div class="dest-filters-inner">
+        <button class="filter-btn active" data-filter="all">All Stays</button>
+        <button class="filter-btn" data-filter="couples">Couples</button>
+        <button class="filter-btn" data-filter="families">Families</button>
+        <button class="filter-btn" data-filter="solo">Solo</button>
+        <button class="filter-btn" data-filter="adventures">Adventures</button>
+      </div>
+      <p class="dest-results-count" id="resultsCount">5 stays found</p>
+    </section>
+
+    <!-- HOTEL GRID -->
+    <section class="hotel-grid" id="hotelGrid">
+
+      <article class="hotel-card" data-tags="couples adventures">
+        <div class="hotel-card-img">
+          <img src="../images_desitinations/sigiriya-hotel-lion-rock.jpg" alt="Lion Rock Boutique Resort">
+          <span class="hotel-badge">Editor's Pick</span>
+        </div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-top">
+            <h3>Lion Rock Boutique Resort</h3>
+            <span class="hotel-rating">★ 4.8</span>
+          </div>
+          <p class="hotel-location">Sigiriya, Matale District</p>
+          <p class="hotel-blurb">Rooftop infinity pool with an uninterrupted view of the ancient rock fortress at sunrise.</p>
+          <div class="hotel-card-bottom">
+            <span class="hotel-price"><strong>$180</strong> / night</span>
+            <a href="https://www.booking.com/searchresults.html?ss=Lion+Rock+Boutique+Resort+Sigiriya+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="hotel-card" data-tags="couples families">
+        <div class="hotel-card-img">
+          <img src="../images_desitinations/sigiriya-hotel-water-garden.jpg" alt="Water Garden Heritage Hotel">
+          <span class="hotel-badge">Heritage Stay</span>
+        </div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-top">
+            <h3>Water Garden Heritage Hotel</h3>
+            <span class="hotel-rating">★ 4.9</span>
+          </div>
+          <p class="hotel-location">Sigiriya, Matale District</p>
+          <p class="hotel-blurb">Inspired by the island's ancient hydraulic gardens — private pavilions set among lotus ponds.</p>
+          <div class="hotel-card-bottom">
+            <span class="hotel-price"><strong>$260</strong> / night</span>
+            <a href="https://www.booking.com/searchresults.html?ss=Water+Garden+Heritage+Hotel+Sigiriya+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="hotel-card" data-tags="families solo">
+        <div class="hotel-card-img">
+          <img src="../images_desitinations/sigiriya-hotel-village-eco.jpg" alt="Sigiri Village Eco Lodge">
+        </div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-top">
+            <h3>Sigiri Village Eco Lodge</h3>
+            <span class="hotel-rating">★ 4.6</span>
+          </div>
+          <p class="hotel-location">Sigiriya, Matale District</p>
+          <p class="hotel-blurb">Thatched-roof cabanas in a working village setting — relaxed, affordable, and family-friendly.</p>
+          <div class="hotel-card-bottom">
+            <span class="hotel-price"><strong>$95</strong> / night</span>
+            <a href="https://www.booking.com/searchresults.html?ss=Sigiri+Village+Eco+Lodge+Sigiriya+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="hotel-card" data-tags="adventures couples">
+        <div class="hotel-card-img">
+          <img src="../images_desitinations/sigiriya-hotel-elephant-trail.jpg" alt="Elephant Trail Wilderness Camp">
+          <span class="hotel-badge">Luxury Camp</span>
+        </div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-top">
+            <h3>Elephant Trail Wilderness Camp</h3>
+            <span class="hotel-rating">★ 4.9</span>
+          </div>
+          <p class="hotel-location">Near Sigiriya, bordering Minneriya</p>
+          <p class="hotel-blurb">Luxury tented camp on the edge of the elephant corridor — wake up to the sound of the wild.</p>
+          <div class="hotel-card-bottom">
+            <span class="hotel-price"><strong>$340</strong> / night</span>
+            <a href="https://www.booking.com/searchresults.html?ss=Elephant+Trail+Wilderness+Camp+Sigiriya+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="hotel-card" data-tags="solo families">
+        <div class="hotel-card-img">
+          <img src="../images_desitinations/sigiriya-hotel-ancient-city-view.jpg" alt="Ancient City View Hotel">
+        </div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-top">
+            <h3>Ancient City View Hotel</h3>
+            <span class="hotel-rating">★ 4.5</span>
+          </div>
+          <p class="hotel-location">Sigiriya, Matale District</p>
+          <p class="hotel-blurb">Budget-friendly rooms with a rooftop terrace facing the fortress — perfect for early risers.</p>
+          <div class="hotel-card-bottom">
+            <span class="hotel-price"><strong>$130</strong> / night</span>
+            <a href="https://www.booking.com/searchresults.html?ss=Ancient+City+View+Hotel+Sigiriya+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="footer-grid">
+      <div>
+        <p>Travel makes one modest, you see what a tiny place you occupy in the world. Explore Sri Lanka and create memories that last a lifetime.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For Travellers</h4>
+        <ul>
+          <li><a href="#">Why us</a></li>
+          <li><a href="#">Why Touring</a></li>
+          <li><a href="#">Share your review</a></li>
+          <li><a href="#">Travel Insurance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact Info</h4>
+        <p>+94786480244</p>
+        <p>Sri Lanka</p>
+        <p>support@tourisminsrilanka.com</p>
+      </div>
+    </div>
+    <div class="copyright">Copyright © 2023 Tourism In Sri Lanka</div>
+  </footer>
+
+  <script>
+    (function () {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.hotel-card');
+      const countLabel = document.getElementById('resultsCount');
+
+      function updateCount(filter) {
+        const visible = filter === 'all'
+          ? cards.length
+          : Array.from(cards).filter(c => (c.getAttribute('data-tags') || '').includes(filter)).length;
+        countLabel.textContent = `${visible} stay${visible === 1 ? '' : 's'} found`;
+      }
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach((item) => item.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.getAttribute('data-filter');
+
+          cards.forEach((card) => {
+            const tags = card.getAttribute('data-tags') || '';
+            card.style.display = (filter === 'all' || tags.includes(filter)) ? 'flex' : 'none';
+          });
+
+          updateCount(filter);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

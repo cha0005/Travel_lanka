@@ -1,0 +1,87 @@
+#season-effect-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#season-effect-layer::before,
+#season-effect-layer::after {
+  content: '';
+  position: absolute;
+  inset: -10%;
+  pointer-events: none;
+}
+
+#season-effect-layer::before {
+  filter: blur(24px);
+  opacity: 1;
+  background: linear-gradient(180deg, rgba(248, 244, 255, 0.08), rgba(248, 244, 255, 0.56) 30%, rgba(248, 244, 255, 0.0) 74%);
+  animation: seasonBloom 14s ease-in-out infinite alternate;
+}
+
+#season-effect-layer::after {
+  opacity: 0.8;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.0));
+  animation: seasonSweep 18s linear infinite;
+}
+
+@keyframes seasonBloom {
+  0% { transform: translate3d(0, -2%, 0) scale(1); }
+  100% { transform: translate3d(0, 2%, 0) scale(1.05); }
+}
+
+@keyframes seasonSweep {
+  0% { transform: translate3d(-18%, 0, 0); }
+  100% { transform: translate3d(18%, 0, 0); }
+}
+
+.destinations-main {
+  position: relative;
+  isolation: isolate;
+}
+
+.destinations-main > section {
+  position: relative;
+  z-index: 1;
+}
+
+.season-particle {
+  display: none !important;
+}
+
+body.season-jan #season-effect-layer::before { background: linear-gradient(180deg, rgba(199, 220, 255, 0.48), rgba(199, 220, 255, 0.0) 72%); }
+body.season-feb #season-effect-layer::before { background: linear-gradient(180deg, rgba(255, 173, 207, 0.44), rgba(255, 173, 207, 0.0) 72%); }
+body.season-mar #season-effect-layer::before { background: linear-gradient(180deg, rgba(148, 219, 130, 0.42), rgba(148, 219, 130, 0.0) 72%); }
+body.season-apr #season-effect-layer::before,
+body.season-may #season-effect-layer::before { background: linear-gradient(180deg, rgba(255, 206, 92, 0.44), rgba(255, 206, 92, 0.0) 72%); }
+body.season-jun #season-effect-layer::before,
+body.season-jul #season-effect-layer::before { background: linear-gradient(180deg, rgba(124, 206, 255, 0.44), rgba(124, 206, 255, 0.0) 72%); }
+body.season-aug #season-effect-layer::before,
+body.season-sep #season-effect-layer::before { background: linear-gradient(180deg, rgba(255, 145, 58, 0.46), rgba(255, 145, 58, 0.0) 72%); }
+body.season-oct #season-effect-layer::before { background: linear-gradient(180deg, rgba(92, 70, 139, 0.46), rgba(92, 70, 139, 0.0) 72%); }
+body.season-nov #season-effect-layer::before,
+body.season-dec #season-effect-layer::before { background: linear-gradient(180deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.0) 72%); }
+
+body.season-jan #season-effect-layer::after { background: linear-gradient(90deg, rgba(215, 232, 255, 0.0), rgba(215, 232, 255, 0.3) 50%, rgba(215, 232, 255, 0.0)); }
+body.season-feb #season-effect-layer::after { background: linear-gradient(90deg, rgba(255, 194, 223, 0.0), rgba(255, 194, 223, 0.32) 50%, rgba(255, 194, 223, 0.0)); }
+body.season-mar #season-effect-layer::after { background: linear-gradient(90deg, rgba(184, 234, 171, 0.0), rgba(184, 234, 171, 0.3) 50%, rgba(184, 234, 171, 0.0)); }
+body.season-apr #season-effect-layer::after,
+body.season-may #season-effect-layer::after { background: linear-gradient(90deg, rgba(255, 224, 146, 0.0), rgba(255, 224, 146, 0.32) 50%, rgba(255, 224, 146, 0.0)); }
+body.season-jun #season-effect-layer::after,
+body.season-jul #season-effect-layer::after { background: linear-gradient(90deg, rgba(153, 226, 255, 0.0), rgba(153, 226, 255, 0.34) 50%, rgba(153, 226, 255, 0.0)); }
+body.season-aug #season-effect-layer::after,
+body.season-sep #season-effect-layer::after { background: linear-gradient(90deg, rgba(255, 174, 110, 0.0), rgba(255, 174, 110, 0.32) 50%, rgba(255, 174, 110, 0.0)); }
+body.season-oct #season-effect-layer::after { background: linear-gradient(90deg, rgba(79, 61, 119, 0.0), rgba(79, 61, 119, 0.34) 50%, rgba(79, 61, 119, 0.0)); }
+body.season-nov #season-effect-layer::after,
+body.season-dec #season-effect-layer::after { background: linear-gradient(90deg, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.34) 50%, rgba(255, 255, 255, 0.0)); }
+
+@media (prefers-reduced-motion: reduce) {
+  #season-effect-layer::before,
+  #season-effect-layer::after {
+    filter: none;
+    opacity: 0.5;
+    animation: none;
+  }
+}

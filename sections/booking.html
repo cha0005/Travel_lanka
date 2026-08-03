@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    html.page-fadein {
+      opacity: 0 !important;
+      transition: opacity 3s cubic-bezier(0.4,0,0.2,1) !important;
+    }
+    html.page-fadein.page-fadein-active {
+      opacity: 1 !important;
+    }
+  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking | Tourism Sri Lanka</title>
+  <link rel="icon" type="image/png" href="../favicon_io/favicon.png?v=2">
+  <link rel="stylesheet" href="booking.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-left">
+      <span class="logo-text">
+        <span class="logo-green">Tourism In</span>
+        <span class="logo-gold"> Sri Lanka</span>
+      </span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="destinations.html">Destination</a>
+      <a href="articles.html">Article</a>
+      <a href="#">About Us</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+
+  <main class="booking-page">
+    <section class="hero-booking">
+      <h1>Plan Your Stay: Gateway to Paradise</h1>
+
+      <div class="hero-image-wrap">
+        <img src="../images_desitinations/feature-hero.jpg" alt="Sri Lanka booking hero" />
+
+        <div class="booking-search-wrapper">
+          <div class="booking-search-card">
+          <div class="search-top-tabs">
+            <button type="button" class="tab-btn active">Tour &amp; Guides</button>
+            <button type="button" class="tab-btn">Trains</button>
+            <button type="button" class="tab-btn">Restaurants</button>
+            <button type="button" class="tab-btn">Hotels</button>
+          </div>
+
+          <div class="search-fields">
+            <div class="field">
+              <label>Location</label>
+              <div class="field-pill">Colombo to Nuwara Eliya</div>
+            </div>
+            <div class="field">
+              <label>Check In</label>
+              <div class="field-pill">05 Dec, 2025</div>
+            </div>
+            <div class="field">
+              <label>Check Out</label>
+              <div class="field-pill">10th Feb, 2026</div>
+            </div>
+            <div class="field">
+              <label>Travellers</label>
+              <div class="field-pill">Family</div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="place-filters" aria-label="Place filters">
+      <button class="filter-btn active" data-filter="all">All Places</button>
+      <button class="filter-btn" data-filter="couples">Couples</button>
+      <button class="filter-btn" data-filter="families">Families</button>
+      <button class="filter-btn" data-filter="solo">Solo</button>
+      <button class="filter-btn" data-filter="adventures">Adventures</button>
+    </section>
+
+    <section class="places-grid" id="placesGrid">
+      <article class="place-card" data-tags="families couples">
+        <img src="../images_desitinations/image-place-1.jpg" alt="Sigiriya">
+        <h3>Sigiriya Rock Fortress</h3>
+        <p>Sigiriya, Matale District, Central Province</p>
+        <a href="../mainPageDestinations/sigiriya.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="couples adventures">
+        <img src="../images_desitinations/image-place-2.jpg" alt="Ella">
+        <h3>Ella (Nine Arches Bridge)</h3>
+        <p>Ella, Badulla District, Uva Province</p>
+        <a href="../mainPageDestinations/ella.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="couples solo">
+        <img src="../images_desitinations/image-place-3.jpg" alt="Galle Fort">
+        <h3>Galle Fort</h3>
+        <p>Galle, Galle District, Southern Province</p>
+        <a href="../mainPageDestinations/galle-fort.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="families solo">
+        <img src="../images_desitinations/image-place-4.jpg" alt="Kandy">
+        <h3>Kandy (Temple of the Tooth)</h3>
+        <p>Kandy, Central Province</p>
+        <a href="../mini_subSections/kandy.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="adventures families">
+        <img src="../images_desitinations/image-place-5.jpg" alt="Yala">
+        <h3>Yala National Park</h3>
+        <p>Tissamaharama, Hambantota District, Southern Province</p>
+        <a href="../mainPageDestinations/yala.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="couples families">
+        <img src="../images_desitinations/image-place-6.jpg" alt="Nuwara Eliya">
+        <h3>Nuwara Eliya</h3>
+        <p>Nuwara Eliya District, Central Province</p>
+        <a href="../mainPageDestinations/nuwara-eliya.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="adventures couples">
+        <img src="../images_desitinations/image-place-7.jpg" alt="Mirissa">
+        <h3>Mirissa (Beach &amp; Whales)</h3>
+        <p>Mirissa, Matara District, Southern Province</p>
+        <a href="../mainPageDestinations/mirissa.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="families solo">
+        <img src="../images_desitinations/image-place-8.jpg" alt="Polonnaruwa">
+        <h3>Polonnaruwa Ancient City</h3>
+        <p>Polonnaruwa, North Central Province</p>
+        <a href="../mainPageDestinations/polonnaruwa.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="adventures couples">
+        <img src="../images_desitinations/image-place-9.jpg" alt="Arugam Bay">
+        <h3>Arugam Bay</h3>
+        <p>Pottuvil, Ampara District, Eastern Province</p>
+        <a href="../mainPageDestinations/arugam-bay.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="solo families">
+        <img src="../images_desitinations/image-place-10.jpg" alt="Jaffna">
+        <h3>Jaffna Peninsula</h3>
+        <p>Jaffna, Northern Province</p>
+        <a href="../mainPageDestinations/jaffna.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="families solo">
+        <img src="../images/anuradhapura/main.jpg" alt="Anuradhapura">
+        <h3>Anuradhapura (Ruwanweli)</h3>
+        <p>Anuradhapura, North Central Province</p>
+        <a href="../mainPageDestinations/anuradhapura.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="adventures couples">
+        <img src="../images/hikkaduwa/main.jpg" alt="Hikkaduwa">
+        <h3>Hikkaduwa (Corals)</h3>
+        <p>Hikkaduwa, Southern Province</p>
+        <a href="../mainPageDestinations/hikkaduwa.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="solo families">
+        <img src="../images/dambulla/main.jpg" alt="Dambulla">
+        <h3>Dambulla Cave Temple</h3>
+        <p>Dambulla, Matale District, Central Province</p>
+        <a href="../mainPageDestinations/dambulla.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="adventures solo">
+        <img src="../images/adams-peak/main.jpg" alt="Adam's Peak">
+        <h3>Adam's Peak (Sri Pada)</h3>
+        <p>Ratnapura District, Sabaragamuwa Province</p>
+        <a href="../mainPageDestinations/adams-peak.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="adventures solo">
+        <img src="../images/sinharaja/main.jpg" alt="Sinharaja">
+        <h3>Sinharaja Rain Forest</h3>
+        <p>Deniyaya, Southern Province</p>
+        <a href="../mainPageDestinations/sinharaja.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="adventures couples">
+        <img src="../images/horton-plains/main.jpg" alt="Horton Plains">
+        <h3>Horton Plains (World's End)</h3>
+        <p>Ohiya, Nuwara Eliya District</p>
+        <a href="../mainPageDestinations/horton-plains.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="families adventures">
+        <img src="../images/udawalawe/main.jpg" alt="Udawalawe">
+        <h3>Udawalawe National Park</h3>
+        <p>Ratnapura District, Sabaragamuwa Province</p>
+        <a href="../mainPageDestinations/udawalawe.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="couples families">
+        <img src="../images/trincomalee/main.jpg" alt="Trincomalee">
+        <h3>Trincomalee (Nilaveli)</h3>
+        <p>Trincomalee District, Eastern Province</p>
+        <a href="../mainPageDestinations/trincomalee.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="solo couples">
+        <img src="../images/lotus-tower/main.jpg" alt="Lotus Tower">
+        <h3>The Lotus Tower</h3>
+        <p>Colombo, Western Province</p>
+        <a href="../mainPageDestinations/lotus-tower.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="families couples">
+        <img src="../images/negombo/main.jpg" alt="Negombo Lagoon">
+        <h3>Negombo Lagoon</h3>
+        <p>Negombo, Gampaha District, Western Province</p>
+        <a href="../mainPageDestinations/negombo.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="adventures couples">
+        <img src="../images/bentota/main.jpg" alt="Bentota">
+        <h3>Bentota (Water Sports)</h3>
+        <p>Bentota, Southern Province</p>
+        <a href="../mainPageDestinations/bentota.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="solo families">
+        <img src="../images/mannar/main.jpg" alt="Mannar">
+        <h3>Mannar (Baobab Trees)</h3>
+        <p>Mannar District, Northern Province</p>
+        <a href="../mainPageDestinations/mannar.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="adventures families">
+        <img src="../images/kitulgala/main.jpg" alt="Kitulgala">
+        <h3>Kitulgala (Rafting)</h3>
+        <p>Kegalle District, Sabaragamuwa Province</p>
+        <a href="../mainPageDestinations/kitulgala.html">Search Hotels</a>
+      </article>
+
+      <article class="place-card" data-tags="adventures solo">
+        <img src="../images/pidurangala/main.jpg" alt="Pidurangala Rock">
+        <h3>Pidurangala Rock</h3>
+        <p>Sigiriya, Matale District, Central Province</p>
+        <a href="../mainPageDestinations/pidurangala.html">Search Hotels</a>
+      </article>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="footer-grid">
+      <div>
+        <p>Travel makes one modest, you see what a tiny place you occupy in the world. Once a year, go someplace you've never been before. Explore and use this Zakra travel demo to make travel-friendly website.</p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>For Travellers</h4>
+        <ul>
+          <li><a href="#">Why us</a></li>
+          <li><a href="#">Why Touring</a></li>
+          <li><a href="#">Share your review</a></li>
+          <li><a href="#">Travel Insurance</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact Info</h4>
+        <p>+94786480244</p>
+        <p>Sri Lanka</p>
+        <p>support@tourisminsrilanka.com</p>
+      </div>
+    </div>
+
+    <div class="copyright">Copyright © 2023 Tourism In Sri Lanka</div>
+  </footer>
+
+  <script>
+    (function () {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.place-card');
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach((item) => item.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.getAttribute('data-filter');
+
+          cards.forEach((card) => {
+            const tags = card.getAttribute('data-tags') || '';
+            if (filter === 'all' || tags.includes(filter)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    })();
+  </script>
+  <script src="booking-animations.js"></script>
+  <script>
+    // Simple fade-in animation on page load (applied to <html> for reliability)
+    // Set initial opacity as early as possible
+    document.documentElement.classList.add('page-fadein');
+    function fadeInHtml() {
+      setTimeout(function () {
+        document.documentElement.classList.add('page-fadein-active');
+      }, 50);
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fadeInHtml);
+    } else {
+      fadeInHtml();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ella | Tourism in Sri Lanka</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green:#0f3d2e;
+      --gold:#d4a017;
+      --dark:#2b2b2b;
+      --light:#f7f7f7;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    body{
+      font-family:'Poppins',sans-serif;
+      color:var(--dark);
+      line-height:1.7;
+      background: #f7eefc;
+    }
+
+    /* NAVBAR */
+    header{
+      max-width:1200px;
+      margin:auto;
+      padding:22px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #eee;
+    }
+
+    .logo{
+      font-family:Georgia, serif;
+      font-size:22px;
+      font-weight:600;
+    }
+
+    .logo-green{color:var(--green)}
+    .logo-gold{color:var(--gold)}
+
+    nav a{
+      margin-left:18px;
+      padding:8px 18px;
+      border-radius:20px;
+      background: #f3e9fa;
+      text-decoration:none;
+      font-size:13px;
+      color:#333;
+    }
+
+    /* TITLE */
+    .page-title{
+      text-align:center;
+      font-family:'Playfair Display',serif;
+      font-size:38px;
+      color:var(--green);
+      margin:32px 0 20px;
+    }
+
+    .divider{
+      width:85%;
+      height:1px;
+      background:#ccc;
+      margin:auto;
+    }
+
+    /* CONTENT */
+    .container{
+      max-width:1200px;
+      margin:50px auto;
+      padding:0 20px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:40px;
+      margin-bottom:50px;
+      align-items:center;
+    }
+
+    .grid img{
+      width:100%;
+      border-radius:6px;
+      object-fit:cover;
+    }
+
+    h2{
+      font-family:'Playfair Display',serif;
+      margin-bottom:16px;
+    }
+
+    ul{
+      margin-left:18px;
+    }
+
+    .full-image img{
+      width:100%;
+      border-radius:6px;
+      margin:50px 0;
+    }
+
+    /* FOOTER */
+    footer{
+      background:#222;
+      color:#ccc;
+      padding:50px 20px 20px;
+    }
+
+    .footer-grid{
+      max-width:1200px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:30px;
+    }
+
+    footer h3{
+      color:#fff;
+      margin-bottom:12px;
+    }
+
+    footer a{
+      display:block;
+      text-decoration:none;
+      color:#ccc;
+      margin-bottom:6px;
+      font-size:14px;
+    }
+
+    .copyright{
+      text-align:center;
+      margin-top:30px;
+      font-size:13px;
+      color:#777;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:500px){
+      header{flex-direction:column;gap:15px}
+      .footer-grid{grid-template-columns:1fr}
+    }
+  </style>
+  <link rel="stylesheet" href="dest-animations.css">
+  <link rel="stylesheet" href="destination-fun-theme.css">
+  <link rel="icon" type="image/png" href="../favicon_io/favicon.png?v=2">
+</head>
+
+<body>
+<div class="page-curtain"><div class="curtain-left"></div><div class="curtain-right"></div></div>
+
+<header style="width:100%;background:#f8f2fc;padding:10px 0;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+    <div style="margin-left:36px;">
+      <span style="font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;letter-spacing:0.5px;">
+        <span style="color:#174c3c;">Tourism In</span>
+        <span style="color:#e2b13c;"> Sri Lanka</span>
+      </span>
+    </div>
+    <nav style="display:flex;gap:16px;margin-right:36px;">
+      <a href="../index.html" style="font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:500;color:#222;text-decoration:none;padding:6px 18px;border-radius:18px;background:#f3ecfa;transition:background 0.2s;">Home</a>
+      <a href="../sections/destinations.html" style="font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:500;color:#222;text-decoration:none;padding:6px 18px;border-radius:18px;background:#f3ecfa;transition:background 0.2s;">Destination</a>
+      <a href="../sections/articles.html" style="font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:500;color:#222;text-decoration:none;padding:6px 18px;border-radius:18px;background:#f3ecfa;transition:background 0.2s;">Article</a>
+      <a href="#" style="font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:500;color:#222;text-decoration:none;padding:6px 18px;border-radius:18px;background:#f3ecfa;transition:background 0.2s;">About Us</a>
+      <a href="#footer" style="font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:500;color:#222;text-decoration:none;padding:6px 18px;border-radius:18px;background:#f3ecfa;transition:background 0.2s;">Contact</a>
+    </nav>
+  </header>
+
+<h1 class="page-title">Ella (The Mountain Paradise)</h1>
+<div class="divider"></div>
+
+<div class="container">
+
+  <!-- SECTION 1 -->
+  <div class="grid">
+    <img src="../images/ella/main.jpg" alt="Ella Sri Lanka">
+    <div>
+      <h2>The Charm of Ella</h2>
+      <p>
+        Ella is a peaceful hill town nestled in Sri Lanka’s central highlands, famous for its
+        misty mountains, tea plantations, and breathtaking viewpoints. Once a quiet village,
+        Ella has grown into a favorite destination for travelers seeking nature, adventure,
+        and relaxation. Cool weather, scenic train rides, and welcoming cafés make Ella
+        unforgettable.
+      </p>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="grid">
+    <div>
+      <h2>Key Highlights</h2>
+      <ul>
+        <li><strong>Nine Arch Bridge:</strong> Iconic colonial-era railway bridge.</li>
+        <li><strong>Ella to Kandy Train Ride:</strong> One of the world’s most scenic routes.</li>
+        <li><strong>Little Adam’s Peak:</strong> Easy hike with panoramic views.</li>
+        <li><strong>Ella Rock:</strong> Challenging trek for adventure lovers.</li>
+        <li><strong>Tea Plantations:</strong> Endless green landscapes and fresh air.</li>
+      </ul>
+    </div>
+    <img src="../images/ella/feature.jpg" alt="Nine Arch Bridge">
+  </div>
+
+  <!-- FULL IMAGE -->
+  <div class="full-image">
+    <img src="../images/ella/panorama.jpg" alt="Ella Mountains Panorama">
+  </div>
+
+  <!-- QUICK FACTS -->
+  <h2>Quick Facts for Travelers</h2>
+  <ul>
+    <li><strong>Best Time to Visit:</strong> January – March & June – September</li>
+    <li><strong>Climate:</strong> Cool and misty year-round</li>
+    <li><strong>Best Experiences:</strong> Hiking, photography, scenic train rides</li>
+  </ul>
+
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p>
+        Travel makes one modest. You see what a tiny place you occupy in the world.
+      </p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Destinations</a>
+      <a href="#">Blog</a>
+    </div>
+
+    <div>
+      <h3>For Travellers</h3>
+      <a href="#">Why Us</a>
+      <a href="#">Reviews</a>
+      <a href="#">Insurance</a>
+    </div>
+
+    <div>
+      <h3>Contact Info</h3>
+      <p>
+        +94 78 123 4567<br>
+        Sri Lanka<br>
+        info@tourismsrilanka.com
+      </p>
+    </div>
+  </div>
+
+  <div class="copyright">
+    © 2026 Tourism Sri Lanka. All rights reserved.
+  </div>
+</footer>
+
+<script src="dest-animations.js"></script>
+</body>
+</html>
+
+

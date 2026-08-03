@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estate Treks & Guided Walks — Hill Country | Tourism Sri Lanka</title>
+  <link rel="icon" type="image/png" href="../favicon_io/favicon.png?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {margin:0;font-family:'Inter',sans-serif;background:#f7fafd;color:#222;}
+    .container {max-width:900px;margin:40px auto;padding:32px;background:#fff;border-radius:18px;box-shadow:0 4px 24px rgba(0,0,0,0.07);}
+    h1 {font-family:'Playfair Display',serif;font-size:2.2rem;color:#1a3557;margin-bottom:8px;}
+    .subtitle {color:#555;font-size:1.05rem;margin-bottom:24px;line-height:1.6;}
+    .search-bar {display:flex;gap:12px;margin-bottom:24px;}
+    .search-bar input {flex:1;padding:12px 16px;border-radius:8px;border:1px solid #ccc;font-size:1rem;}
+    .search-bar button {padding:12px 24px;border-radius:8px;background:#ff914d;color:#fff;font-weight:600;border:none;cursor:pointer;font-size:1rem;}
+    .search-bar button:hover {background:#ffb37a;}
+    .map-section {margin:24px 0;}
+    iframe {width:100%;height:380px;border-radius:12px;border:0;}
+    .directions {margin-top:18px;}
+    .directions a {display:inline-block;padding:10px 22px;background:#1a3557;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;transition:.2s;margin-right:10px;margin-bottom:8px;}
+    .directions a:hover {background:#ff914d;}
+    .directions a.secondary {background:#e2b13c;color:#1a1a1a;}
+    .directions a.secondary:hover {background:#ffb37a;}
+    .back-link {display:inline-block;margin-top:32px;padding:10px 24px;background:#ff914d;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;transition:.2s;}
+    .back-link:hover {background:#ffb37a;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Estate Treks & Guided Walks — Hill Country</h1>
+    <p class="subtitle">Walk the pathways between tea bushes with a local guide, learn to identify the finest leaves, and soak in the high-altitude scenery across Nuwara Eliya, Lipton's Seat, and the Bogawantalawa Valley.</p>
+    <div class="search-bar">
+      <input type="text" id="place-search" placeholder="Search for tea estate treks near Nuwara Eliya..." />
+      <button onclick="searchNearby()">Search</button>
+    </div>
+    <div class="map-section">
+      <iframe id="gmap" src="https://www.google.com/maps?q=Nuwara+Eliya+Tea+Estate,+Sri+Lanka&output=embed" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="directions">
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Nuwara+Eliya,+Sri+Lanka" target="_blank" rel="noopener">Get Directions</a>
+      <a class="secondary" href="https://www.google.com/maps/search/tea estate trek guided walk Nuwara Eliya Sri Lanka" target="_blank" rel="noopener">Open Map Search</a>
+    </div>
+    <a href="tea-activity.html" class="back-link">&#8592; Back to Tea Plantation Trek Activities</a>
+  </div>
+  <script>
+    function searchNearby() {
+      var query = document.getElementById('place-search').value;
+      if (query) {
+        document.getElementById('gmap').src = 'https://www.google.com/maps?q=' + encodeURIComponent(query + ' near Nuwara Eliya, Sri Lanka') + '&output=embed';
+      }
+    }
+    document.getElementById('place-search').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') searchNearby();
+    });
+  </script>
+</body>
+</html>

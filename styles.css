@@ -1,0 +1,1215 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #eef1f4;
+  color: #111;
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Floating island model, centered behind the title */
+#lanka-model-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(850px, 90vw);
+  height: min(850px, 75vh);
+  z-index: 14;      /* above clouds (up to 14, ties resolved by DOM order),
+                        below the title layer (z-index 15) */
+  pointer-events: none;
+}
+
+#lanka-model-container canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Page transition overlay */
+.page-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #eef1f4;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.page-transition.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+}
+
+.navbar .logo {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.navbar .logo .tourism-in {
+  color: #045127;
+}
+
+.navbar .logo .sri-lanka {
+  color: #111;
+}
+
+.navbar nav a {
+  margin-left: 16px;
+  text-decoration: none;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Playfair Display', Georgia, serif;
+  padding: 10px 24px;
+  background: #F0F0F0;
+  border-radius: 25px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.navbar nav a:hover {
+  background: #E0E0E0;
+  transform: translateY(-2px);
+}
+
+/* HERO */
+
+
+.hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #eef1f4;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0vh;
+}
+
+.hero-title {
+  position: absolute;
+  top: 120px;
+  left: 60px;
+  font-size: 48px;
+  z-index: 10;
+  color: #eae9e6;
+  font-weight: 700;
+  font-family: 'Cinzel', Georgia, serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 
+    0 0 20px rgba(201, 169, 97, 0.8),
+    0 0 40px rgba(201, 169, 97, 0.6),
+    0 0 60px rgba(201, 169, 97, 0.4),
+    2px 2px 8px rgba(0,0,0,0.8);
+  -webkit-text-stroke: 2px rgba(0,0,0,0.9);
+  text-shadow: 2px rgba(0,0,0,0.9);
+}
+
+.hero-subtitle {
+  position: absolute;
+  top: 195px;
+  left: 62px;
+  max-width: 600px;
+  font-size: 18px;
+  line-height: 1.6;
+  z-index: 10;
+  color: #fff;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  text-shadow: 
+    0 0 15px rgba(0,0,0,0.9),
+    0 0 30px rgba(0,0,0,0.7),
+    0 0 45px rgba(0,0,0,0.5),
+    0 2px 8px rgba(0,0,0,0.8);
+}
+
+/* Framed Hero Image Container */
+.hero-image-frame {
+  position: relative;
+  width: 98%;
+  max-width: 1800px;
+  height: 80vh;
+  border-radius: 0 0 30px 30px;
+  overflow: hidden;
+  box-shadow: 
+    0 30px 80px rgba(0,0,0,0.25),
+    0 0 0 1px rgba(255,255,255,0.5);
+  animation: heroFloat 6s ease-in-out infinite;
+  clip-path: polygon(
+    0% 8%,
+    5% 6%,
+    10% 4.5%,
+    15% 4%,
+    20% 4.5%,
+    25% 6%,
+    30% 8%,
+    35% 9%,
+    40% 9.5%,
+    45% 9%,
+    50% 8%,
+    55% 6.5%,
+    60% 5.5%,
+    65% 5%,
+    70% 5.5%,
+    75% 6.5%,
+    80% 8%,
+    85% 9%,
+    90% 9.5%,
+    95% 8.5%,
+    100% 7%,
+    100% 100%,
+    0% 100%
+  );
+}
+
+.hero-image-frame::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: inherit;
+  filter: blur(40px);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.hero-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@keyframes heroFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  animation: bounce 2s infinite;
+  cursor: pointer;
+}
+
+.scroll-indicator svg {
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+  transition: transform 0.3s ease;
+}
+
+.scroll-indicator:hover svg {
+  transform: scale(1.1);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-12px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-6px);
+  }
+}
+
+/* Vector Stamp Decoration */
+.vector-stamp {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 120px;
+  height: 120px;
+  animation: stampRotate 20s linear infinite;
+  z-index: 2;
+}
+
+.vector-stamp svg {
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+@keyframes stampRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Vector Badge */
+.vector-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  z-index: 2;
+  animation: badgePulse 3s ease-in-out infinite;
+}
+
+.vector-badge svg {
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Corner Accents */
+.corner-accent {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(255,255,255,0.8);
+  z-index: 2;
+}
+
+.corner-accent.top-left {
+  top: 15px;
+  left: 15px;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 10px;
+}
+
+.corner-accent.bottom-right {
+  bottom: 15px;
+  right: 15px;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 10px;
+}
+
+/* CONTENT SECTIONS */
+.content-section {
+  padding: 140px 20%;
+  text-align: center;
+  position: relative;
+}
+
+.content-section.dark {
+  background: #f3e9fa;
+}
+
+.content-section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.content-section p {
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Section Image Frames */
+.section-image-frame {
+  width: 100%;
+  max-width: 1600px;
+  height: 600px;
+  margin: 0 auto 40px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 
+    0 20px 50px rgba(0,0,0,0.15),
+    0 0 0 1px rgba(0,0,0,0.05);
+  position: relative;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+.section-image-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.1));
+  pointer-events: none;
+}
+
+.section-image-frame:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 
+    0 30px 70px rgba(0,0,0,0.2),
+    0 0 0 1px rgba(0,0,0,0.1);
+}
+
+.section-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.section-image-frame:hover img {
+  transform: scale(1.05);
+}
+
+/* CTA */
+.cta-button {
+  margin-top: 40px;
+  padding: 14px 28px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: #0a7f3f;
+  color: white;
+  cursor: pointer;
+}
+
+/* FOOTER */
+.footer {
+  background: #222;
+  color: #ccc;
+  padding: 60px 10%;
+}
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.footer a {
+  display: block;
+  color: #ccc;
+  text-decoration: none;
+  margin-top: 8px;
+}
+
+.footer h4 {
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   PARALLAX CLOUD CURTAIN OPENER
+========================================= */
+
+.parallax-intro {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 50;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Sky background - stays static */
+#sky-layer {
+  z-index: 1;
+}
+
+/* Far mountains - slow parallax */
+#mountain-back-layer {
+  z-index: 2;
+  bottom: 0;
+  top: auto;
+  height: auto;
+  width: 100%;
+  object-position: bottom;
+}
+
+/* Near mountains - medium parallax */
+#mountain-front-layer {
+  z-index: 3;
+  bottom: 0;
+  top: auto;
+  height: auto;
+  width: 100%;
+  object-position: bottom;
+}
+
+/* Cloud layers - these are the "curtains" */
+.cloud {
+  z-index: 10;
+  transition: transform 0.05s linear;
+  will-change: transform;
+}
+
+#cloud1 {
+  z-index: 12;
+  top: -5%;
+  left: -10%;
+  width: 120%;
+  height: auto;
+  object-fit: contain;
+}
+
+#cloud2 {
+  z-index: 11;
+  top: 0%;
+  left: 0%;
+  width: 120%;
+  height: auto;
+  object-fit: contain;
+  transform: scaleX(-1);
+}
+
+#cloud3 {
+  z-index: 13;
+  top: -15%;
+  left: -15%;
+  width: 130%;
+  height: auto;
+  object-fit: contain;
+}
+
+#cloud4 {
+  z-index: 13;
+  top: -10%;
+  right: -15%;
+  left: auto;
+  width: 130%;
+  height: auto;
+  object-fit: contain;
+  transform: scaleX(-1);
+}
+
+#cloud5 {
+  z-index: 14;
+  top: -20%;
+  left: -5%;
+  width: 110%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+/* Hills layers */
+#hill1-layer {
+  z-index: 4;
+  bottom: 0;
+  top: auto;
+  height: auto;
+  width: 100%;
+  object-position: bottom;
+}
+
+#hill2-layer {
+  z-index: 5;
+  bottom: 0;
+  top: auto;
+  height: auto;
+  width: 100%;
+  object-position: bottom;
+}
+
+/* Cliff layers */
+#cliff-left-layer {
+  z-index: 6;
+  bottom: 0;
+  top: auto;
+  height: auto;
+  width: 50%;
+  left: 0;
+  object-fit: contain;
+  object-position: bottom left;
+}
+
+#cliff-right-layer {
+  z-index: 6;
+  bottom: 0;
+  top: auto;
+  height: auto;
+  width: 50%;
+  left: auto;
+  right: 0;
+  object-fit: contain;
+  object-position: bottom right;
+}
+
+/* People foreground */
+#people-layer {
+  z-index: 7;
+  bottom: 0;
+  top: auto;
+  height: auto;
+  width: 100%;
+  object-position: bottom center;
+}
+
+/* Text overlay in parallax */
+.parallax-text-layer {
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Frosted glass panel behind the title + subtitle */
+.glass-title-wrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 44px 64px;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 28px;
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 0 60px rgba(255, 255, 255, 0.06);
+}
+
+.parallax-hero-title {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: clamp(48px, 8vw, 120px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+
+/* Colorful GLASS per-letter title styling.
+   Light, bright fills (no dark gradient stop this time — that's what was
+   making some letters look heavy/bolded) plus a soft outline stroke so
+   each letter "pops" as its own sticker-like shape instead of blending
+   into the glass panel behind it. */
+.title-letter {
+  display: inline-block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 900;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.9);
+  paint-order: stroke fill;
+}
+
+.title-letter:hover {
+  transform: translateY(-6px) scale(1.05);
+}
+
+.title-letter-space {
+  display: inline-block;
+  width: 0.4em;
+}
+
+.title-letter-green {
+  background-image: linear-gradient(180deg, #eafff0 0%, #7ee8a5 55%, #4fd583 100%);
+  text-shadow:
+    0 0 16px rgba(126, 232, 165, 0.55),
+    0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.title-letter-blue {
+  background-image: linear-gradient(180deg, #eaf9ff 0%, #7fd6ff 55%, #4fc3f7 100%);
+  text-shadow:
+    0 0 16px rgba(127, 214, 255, 0.55),
+    0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.title-letter-yellow {
+  background-image: linear-gradient(180deg, #fffbe8 0%, #ffe27a 55%, #ffd54f 100%);
+  text-shadow:
+    0 0 16px rgba(255, 226, 122, 0.55),
+    0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.parallax-hero-subtitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(16px, 2.5vw, 28px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 20px rgba(0,0,0,0.5),
+    0 2px 8px rgba(0,0,0,0.6);
+}
+
+.word-island {
+  color: #a97f0d;
+}
+
+.word-of {
+  color: #ffd335;
+}
+
+.word-wonder {
+  color: #a97f0d;
+}
+
+/* Scroll down hint */
+.scroll-down-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  animation: hintBounce 2.5s ease-in-out infinite;
+}
+
+.scroll-down-hint span {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+.scroll-down-hint svg {
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+}
+
+@keyframes hintBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* Navbar hidden initially during parallax */
+.navbar.parallax-hidden {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.navbar.parallax-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+
+/* Fullscreen Background Section */
+.content-section.fullscreen-bg {
+  position: relative;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.content-section.fullscreen-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+/* Glass Container */
+.glass-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  width: 90%;
+  padding: 50px 45px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 24px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.glass-container h2 {
+  font-size: 36px;
+  margin-bottom: 24px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  letter-spacing: -0.3px;
+}
+
+.glass-container p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  max-width: 100%;
+  margin: 0;
+}
+
+
+/* =========================================
+   MONTH-BASED EFFECT LAYER
+========================================= */
+
+#month-effect-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.month-particle {
+  position: absolute;
+  top: var(--top, -12%);
+  left: var(--left);
+  width: var(--size);
+  height: var(--size);
+  opacity: var(--opacity);
+  animation: monthDrift var(--duration) linear var(--delay) infinite;
+}
+
+.month-fog {
+  width: calc(var(--size) * 5.2);
+  height: calc(var(--size) * 2.8);
+  border-radius: 999px;
+  background: radial-gradient(circle at 45% 50%, rgba(255, 255, 255, 0.38), rgba(233, 243, 255, 0.12) 72%);
+  filter: blur(6px);
+  animation-name: monthFog;
+}
+
+.month-dust {
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 218, 173, 0.26));
+  filter: blur(0.2px);
+  animation-name: monthRise;
+}
+
+.month-heart,
+.month-petal,
+.month-leaf,
+.month-twinkle {
+  border-radius: 50%;
+}
+
+.month-heart {
+  background: radial-gradient(circle at 30% 30%, rgba(255, 240, 246, 0.95), rgba(255, 117, 156, 0.62));
+  animation-name: monthRise;
+}
+
+.month-petal {
+  border-radius: 60% 40% 58% 42%;
+  background: linear-gradient(140deg, rgba(255, 235, 246, 0.95), rgba(255, 147, 190, 0.58));
+  animation-name: monthPetal;
+}
+
+.month-sunflare {
+  width: calc(var(--size) * 1.7);
+  height: calc(var(--size) * 1.7);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 249, 222, 0.88) 0 28%, rgba(255, 208, 120, 0.35) 35%, rgba(255, 208, 120, 0) 70%);
+  filter: blur(0.4px);
+  animation-name: monthPulseRise;
+}
+
+.month-wave {
+  top: auto;
+  bottom: -60px;
+  width: calc(var(--size) * 2.2);
+  height: calc(var(--size) * 0.45);
+  border-radius: 999px;
+  background: linear-gradient(to right, rgba(119, 203, 255, 0.34), rgba(215, 247, 255, 0.34));
+  opacity: 0.26;
+  animation-name: monthWave;
+}
+
+.month-foam {
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(241, 251, 255, 0.92), rgba(165, 229, 255, 0.35));
+  animation-name: monthRise;
+}
+
+.month-leaf {
+  border-radius: 60% 40% 58% 42%;
+  background: linear-gradient(135deg, rgba(255, 208, 132, 0.85), rgba(198, 121, 56, 0.72));
+  animation-name: monthLeaf;
+}
+
+.month-flicker {
+  width: calc(var(--size) * 0.62);
+  height: calc(var(--size) * 1.1);
+  border-radius: 10px;
+  background: linear-gradient(to bottom, rgba(255, 233, 169, 0.88), rgba(255, 151, 95, 0.48));
+  box-shadow: 0 0 14px rgba(255, 164, 102, 0.36);
+  animation-name: monthFlickerFloat;
+}
+
+.month-twinkle {
+  background: radial-gradient(circle at 30% 30%, rgba(255, 254, 214, 0.95), rgba(255, 186, 102, 0.55));
+  box-shadow: 0 0 16px rgba(255, 190, 90, 0.4);
+  animation-name: monthTwinkle;
+}
+
+.month-snow {
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(219,238,255,0.75));
+  box-shadow: 0 0 8px rgba(255,255,255,0.45);
+  animation-name: monthSnow;
+}
+
+@keyframes monthDrift {
+  from {
+    transform: translateX(0) translateY(-10vh);
+  }
+  to {
+    transform: translateX(var(--drift)) translateY(112vh);
+  }
+}
+
+@keyframes monthFog {
+  from {
+    transform: translateX(0) translateY(10vh);
+    opacity: 0;
+  }
+  12% {
+    opacity: var(--opacity);
+  }
+  to {
+    transform: translateX(var(--drift)) translateY(95vh);
+    opacity: 0;
+  }
+}
+
+/* January: subtle firework pops */
+.month-firework {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.3);
+  background:
+    radial-gradient(circle, hsla(var(--hue), 100%, 70%, 0.9) 0 6%, transparent 7% 100%),
+    repeating-conic-gradient(
+      from 0deg,
+      hsla(var(--hue), 100%, 67%, 0.6) 0deg 10deg,
+      transparent 10deg 24deg
+    );
+  filter: blur(0.2px);
+  animation: fireworkPop var(--duration) ease-out forwards;
+}
+
+@keyframes fireworkPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+  20% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.35);
+  }
+}
+
+@keyframes monthRise {
+  from {
+    transform: translateX(0) translateY(110vh) scale(0.85);
+  }
+  to {
+    transform: translateX(var(--drift)) translateY(-15vh) scale(1.08);
+  }
+}
+
+@keyframes monthPulseRise {
+  0% {
+    transform: translateX(0) translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  30% {
+    opacity: var(--opacity);
+  }
+  100% {
+    transform: translateX(var(--drift)) translateY(-20vh) scale(1.12);
+    opacity: 0;
+  }
+}
+
+@keyframes monthPetal {
+  0% {
+    transform: translateX(0) translateY(-10vh) rotate(0deg);
+  }
+  100% {
+    transform: translateX(var(--drift)) translateY(112vh) rotate(220deg);
+  }
+}
+
+@keyframes monthLeaf {
+  0% {
+    transform: translateX(0) translateY(-10vh) rotate(0deg);
+  }
+  50% {
+    transform: translateX(calc(var(--drift) * 0.5)) translateY(52vh) rotate(140deg);
+  }
+  100% {
+    transform: translateX(var(--drift)) translateY(112vh) rotate(280deg);
+  }
+}
+
+@keyframes monthRain {
+  from {
+    transform: translateY(-12vh) translateX(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: var(--opacity);
+  }
+  to {
+    transform: translateY(112vh) translateX(calc(var(--drift) * 0.2));
+    opacity: 0;
+  }
+}
+
+@keyframes monthWave {
+  0% {
+    transform: translateX(-10vw) translateY(0);
+    opacity: 0.08;
+  }
+  50% {
+    transform: translateX(45vw) translateY(-10px);
+    opacity: 0.24;
+  }
+  100% {
+    transform: translateX(110vw) translateY(0);
+    opacity: 0.08;
+  }
+}
+
+@keyframes monthFlickerFloat {
+  0% {
+    transform: translateX(0) translateY(105vh) scale(0.8);
+    opacity: 0;
+  }
+  25% {
+    transform: translateX(calc(var(--drift) * 0.4)) translateY(70vh) scale(1);
+    opacity: var(--opacity);
+  }
+  45% {
+    opacity: calc(var(--opacity) * 0.45);
+  }
+  60% {
+    opacity: var(--opacity);
+  }
+  100% {
+    transform: translateX(var(--drift)) translateY(-12vh) scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes monthTwinkle {
+  0% {
+    transform: translateX(0) translateY(105vh) scale(0.7);
+    opacity: 0;
+  }
+  25% {
+    opacity: var(--opacity);
+  }
+  50% {
+    opacity: calc(var(--opacity) * 0.4);
+  }
+  100% {
+    transform: translateX(var(--drift)) translateY(-20vh) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes monthSnow {
+  0% {
+    transform: translateX(0) translateY(-10vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--opacity);
+  }
+  100% {
+    transform: translateX(var(--drift)) translateY(112vh);
+    opacity: 0.2;
+  }
+}
+
+/* Snow layer on card tops in December */
+.snow-capped {
+  overflow: hidden;
+}
+
+.snow-capped::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 34px;
+  background:
+    radial-gradient(24px 12px at 12% 100%, rgba(255,255,255,0.95) 0 68%, transparent 72%),
+    radial-gradient(26px 14px at 31% 100%, rgba(255,255,255,0.98) 0 70%, transparent 74%),
+    radial-gradient(22px 11px at 52% 100%, rgba(255,255,255,0.94) 0 66%, transparent 70%),
+    radial-gradient(27px 13px at 73% 100%, rgba(255,255,255,0.98) 0 69%, transparent 73%),
+    radial-gradient(20px 10px at 90% 100%, rgba(255,255,255,0.93) 0 66%, transparent 70%),
+    linear-gradient(to bottom, rgba(255,255,255,0.97), rgba(240,248,255,0.72));
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  pointer-events: none;
+}
+
+/* Month color grading and section behavior */
+body.month-feb #month-effect-layer::after,
+body.month-mar #month-effect-layer::after,
+body.month-apr #month-effect-layer::after,
+body.month-may #month-effect-layer::after,
+body.month-aug #month-effect-layer::after,
+body.month-sep #month-effect-layer::after,
+body.month-oct #month-effect-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+body.month-feb #month-effect-layer::after {
+  background: radial-gradient(circle at 20% 15%, rgba(255, 189, 219, 0.2), transparent 45%),
+              radial-gradient(circle at 80% 25%, rgba(255, 214, 232, 0.16), transparent 45%);
+}
+
+body.month-mar #month-effect-layer::after {
+  background: linear-gradient(to bottom, rgba(149, 210, 144, 0.12), rgba(149, 210, 144, 0.04));
+}
+
+body.month-apr #month-effect-layer::after,
+body.month-may #month-effect-layer::after {
+  background:
+    radial-gradient(circle at 14% 16%, rgba(255, 245, 196, 0.3), transparent 28%),
+    radial-gradient(circle at 84% 20%, rgba(255, 229, 169, 0.2), transparent 30%),
+    linear-gradient(to bottom, rgba(255, 220, 145, 0.08), rgba(255, 220, 145, 0.03));
+}
+
+body.month-aug #month-effect-layer::after,
+body.month-sep #month-effect-layer::after {
+  background: linear-gradient(to bottom, rgba(255, 170, 88, 0.12), rgba(255, 170, 88, 0.05));
+}
+
+body.month-oct #month-effect-layer::after {
+  background: linear-gradient(to bottom, rgba(20, 24, 42, 0.2), rgba(20, 24, 42, 0.08));
+}
+
+body.month-jan .parallax-intro,
+body.month-jan .content-section,
+body.month-jan .footer {
+  animation: monthSoftFadeIn 1.5s ease both;
+}
+
+@keyframes monthSoftFadeIn {
+  from {
+    opacity: 0;
+    filter: saturate(0.92);
+  }
+  to {
+    opacity: 1;
+    filter: saturate(1);
+  }
+}
+
+body.month-oct .glass-container:hover {
+  animation: monthSpookyShake 0.35s linear;
+}
+
+@keyframes monthSpookyShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-1.5px); }
+  40% { transform: translateX(1.5px); }
+  60% { transform: translateX(-1px); }
+  80% { transform: translateX(1px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .month-particle,
+  .month-firework,
+  .month-snow {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    opacity: 0.42;
+  }
+}

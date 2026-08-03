@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sri Lanka — Landing</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;900&family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="favicon_io/favicon.png?v=2">
+  <style>
+    /* ── 3D MODEL CONTAINER ── */
+    #lanka-model-container {
+      position: absolute;
+      bottom: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(340px, 42vw);
+      height: min(340px, 42vw);
+      z-index: 6;          /* above hills, clouds, cliffs — below text */
+      pointer-events: none;
+    }
+    #lanka-model-container canvas {
+      width:  100% !important;
+      height: 100% !important;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="tourism-in">Tourism In</span> <span class="sri-lanka">Sri Lanka</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="sections/destinations.html">Destination</a>
+      <a href="sections/articles.html">Article</a>
+      <a href="#">About Us</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+
+  <!-- PARALLAX CLOUD CURTAIN OPENER -->
+  <section class="parallax-intro" id="parallaxIntro">
+    <img src="images/sky.jpg" class="parallax-layer" id="sky-layer" alt="Sky background">
+    <img src="images/mountain-back.png" class="parallax-layer" id="mountain-back-layer" alt="Far mountains">
+    <img src="images/mountain-front.png" class="parallax-layer" id="mountain-front-layer" alt="Near mountains">
+    <img src="images/cloud1.png" class="parallax-layer cloud cloud-left" id="cloud1" alt="">
+    <img src="images/cloud2.png" class="parallax-layer cloud cloud-right" id="cloud2" alt="">
+    <img src="images/cloud3.png" class="parallax-layer cloud cloud-left-far" id="cloud3" alt="">
+    <img src="images/cloud4.png" class="parallax-layer cloud cloud-right-far" id="cloud4" alt="">
+    <img src="images/cloud5.png" class="parallax-layer cloud cloud-center" id="cloud5" alt="">
+    <img src="images/hill1.png" class="parallax-layer" id="hill1-layer" alt="Hills">
+    <img src="images/hill2.png" class="parallax-layer" id="hill2-layer" alt="Hills front">
+    <img src="images/cliff-left.png" class="parallax-layer" id="cliff-left-layer" alt="Cliff left">
+    <img src="images/cliff-right.png" class="parallax-layer" id="cliff-right-layer" alt="Cliff right">
+    <img src="images/people.png" class="parallax-layer" id="people-layer" alt="People">
+    <div class="parallax-layer parallax-text-layer" id="text-layer">
+      <div class="glass-title-wrap">
+        <h1 class="parallax-hero-title" aria-label="Sri Lanka">
+          <span class="title-letter title-letter-green">S</span>
+          <span class="title-letter title-letter-blue">r</span>
+          <span class="title-letter title-letter-yellow">i</span>
+          <span class="title-letter title-letter-green">L</span>
+          <span class="title-letter title-letter-blue">a</span>
+          <span class="title-letter title-letter-yellow">n</span>
+          <span class="title-letter title-letter-green">k</span>
+          <span class="title-letter title-letter-blue">a</span>
+        </h1>
+        <p class="parallax-hero-subtitle" aria-label="Island of Wonder">
+          <span class="title-letter title-letter-yellow">I</span>
+          <span class="title-letter title-letter-green">s</span>
+          <span class="title-letter title-letter-blue">l</span>
+          <span class="title-letter title-letter-yellow">a</span>
+          <span class="title-letter title-letter-green">n</span>
+          <span class="title-letter title-letter-blue">d</span>
+          <span class="title-letter-space"> </span>
+          <span class="title-letter title-letter-yellow">o</span>
+          <span class="title-letter title-letter-green">f</span>
+          <span class="title-letter-space"> </span>
+          <span class="title-letter title-letter-blue">W</span>
+          <span class="title-letter title-letter-yellow">o</span>
+          <span class="title-letter title-letter-green">n</span>
+          <span class="title-letter title-letter-blue">d</span>
+          <span class="title-letter title-letter-yellow">e</span>
+          <span class="title-letter title-letter-green">r</span>
+        </p>
+      </div>
+    </div>
+    <div id="lanka-model-container" aria-hidden="true"></div>
+    <div class="scroll-down-hint"
+ id="parallax-scroll-hint">
+      <span>Scroll Down</span>
+      <svg width="30" height="30" viewBox="0 0 30 30">
+        <path d="M15 8 L15 22 M15 22 L9 16 M15 22 L21 16"
+              stroke="#fff" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="parallax-page">
+
+
+    <!-- SECTION 1 — Full BG with Glass Container -->
+    <section class="content-section fullscreen-bg" style="background-image: url('images/Sri-Lanka-tourism.jpg');">
+      <div class="glass-container">
+        <h2>Discover Sri Lanka</h2>
+        <p>
+        Discover the allure of Sri Lanka, an island paradise in the Indian Ocean.
+        Immerse yourself in rich cultural heritage, from the towering temples to timeless
+        fortresses to the spiritual Temple of the Tooth Relic in Kandy. Explore misty tea
+        plantations, encounter wildlife in national parks, and let us on an island journey
+        that will captivate your heart and create memories that will last a lifetime.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 2 — Full BG with Glass Container -->
+    <section class="content-section fullscreen-bg" style="background-image: url('images/polonnaruwa.jpg');">
+      <div class="glass-container">
+        <h2>Timeless Civilizations</h2>
+        <p>
+          Sri Lanka is home to sacred cities, towering stupas, and ancient kingdoms
+          that shaped South Asian history. From sacred Buddhist sites to stone-carved
+          monuments, every monument tells a story of devotion, engineering
+          brilliance, and spiritual depth.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 3 — Full BG with Glass Container -->
+    <section class="content-section fullscreen-bg" style="background-image: url('images/nuwara-eliya.jpg');">
+      <div class="glass-container">
+        <h2>Untamed Natural Beauty</h2>
+        <p>
+          From mist-covered highlands to dense rainforests and golden savannahs,
+          Sri Lanka's landscapes are breathtakingly diverse. Elephants roam
+          national parks while rare birds and exotic wildlife thrive in protected
+          reserves.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 4 — Full BG with Glass Container -->
+    <section class="content-section fullscreen-bg" style="background-image: url('images/arugam-bay.jpg');">
+      <div class="glass-container">
+        <h2>Endless Shores</h2>
+        <p>
+          Turquoise waters meet palm-fringed beaches along the island's stunning
+          coastline. Whether you seek surfing, diving, whale watching, or quiet
+          sunsets, Sri Lanka offers pristine ocean wonders.
+        </p>
+        <button class="cta-button" id="enterSite">
+          Explore Destinations
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer" class="footer">
+    <div class="footer-cols">
+      <div>
+        <p>
+          Travel makes one modest. You see what a tiny place you occupy in the
+          world. Explore Sri Lanka and create memories that last a lifetime.
+        </p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Destinations</a>
+        <a href="sections/articles.html">Articles</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div>
+        <h4>For Travellers</h4>
+        <a href="#">Why us</a>
+        <a href="#">Why Touring</a>
+        <a href="#">Share your review</a>
+        <a href="#">Travel Insurance</a>
+      </div>
+
+      <div>
+        <h4>Contact Info</h4>
+        <p>+94786480244</p>
+        <p>Sri Lanka</p>
+        <p>support@tourisminsrilanka.com</p>
+      </div>
+    </div>
+
+    <p class="copyright">
+      Copyright © 2023 Tourism In Sri Lanka
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+    const modelContainer = document.getElementById('lanka-model-container');
+
+    if (modelContainer) {
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      const loader = new GLTFLoader();
+      const clock = new THREE.Clock();
+
+      let lankaModel = null;
+      let baseQuaternion = null; // the "standing up straight, facing camera" orientation
+
+      // Rotation that faces the flat map toward the camera AND keeps north up.
+      const MODEL_ROTATION_X = Math.PI / 2;
+
+      // How fast the model spins, in radians/second. 0.2 ≈ one full
+      // rotation every ~31 seconds — slow and gentle, not a spinning coin.
+      const SPIN_SPEED = 0.2;
+
+      const worldUp = new THREE.Vector3(0, 1, 0);
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      modelContainer.appendChild(renderer.domElement);
+
+      camera.position.set(0, 0.35, 5.6);
+
+      scene.add(new THREE.HemisphereLight(0xffffff, 0x355f7c, 2.2));
+
+      const keyLight = new THREE.DirectionalLight(0xffffff, 2.6);
+      keyLight.position.set(3, 4, 5);
+      scene.add(keyLight);
+
+      const rimLight = new THREE.DirectionalLight(0x9fd6ff, 1.5);
+      rimLight.position.set(-4, 2, -3);
+      scene.add(rimLight);
+
+      function resizeModel() {
+        const { width, height } = modelContainer.getBoundingClientRect();
+        if (!width || !height) return;
+
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      }
+
+      // One color per Sri Lankan province. District mesh names in the glb
+      // follow the pattern "LK-<province><district>", e.g. "LK-11",
+      // "LK-12", "LK-13" are all districts of province 1 (Western), so we
+      // color by that leading digit to get a colorful province map instead
+      // of one flat-colored island.
+      const PROVINCE_COLORS = {
+        '1': 0x2ecc71, // Western       – green
+        '2': 0x38bdf8, // Central       – blue
+        '3': 0xfbbf24, // Southern      – yellow
+        '4': 0xf43f5e, // Northern      – red
+        '5': 0xa855f7, // Eastern       – purple
+        '6': 0xfb923c, // North Western – orange
+        '7': 0x14b8a6, // North Central – teal
+        '8': 0xec4899, // Uva           – pink
+        '9': 0x84cc16, // Sabaragamuwa  – lime
+      };
+
+      function colorizeByProvince(model) {
+        model.traverse((child) => {
+          if (!child.isMesh) return;
+
+          // Names look like "LK-11", "LK-73", etc. — the first digit after
+          // "LK-" is the province number.
+          const match = child.name.match(/LK-(\d)/);
+          const provinceDigit = match ? match[1] : null;
+          const hex = PROVINCE_COLORS[provinceDigit] ?? 0xdadada;
+
+          // Clone the material so each district gets its own color instead
+          // of all districts sharing (and overwriting) one material.
+          const mat = child.material.clone();
+          mat.color = new THREE.Color(hex);
+          mat.metalness = 0.1;
+          mat.roughness = 0.55;
+          child.material = mat;
+        });
+      }
+
+      function fitModelToView(model) {
+        // 1. Rotate first (face camera, north stays up), no scale/position yet
+        model.position.set(0, 0, 0);
+        model.rotation.set(MODEL_ROTATION_X, 0, 0);
+        model.scale.set(1, 1, 1);
+        model.updateMatrixWorld(true);
+
+        // 2. Measure the ROTATED box to get the true max axis
+        const rawSize = new THREE.Box3().setFromObject(model).getSize(new THREE.Vector3());
+        const maxAxis = Math.max(rawSize.x, rawSize.y, rawSize.z) || 1;
+        model.scale.setScalar(2.00 / maxAxis);
+        model.updateMatrixWorld(true);
+
+        // 3. NOW measure the rotated+scaled box (position is still 0,0,0)
+        //    and center it.
+        const center = new THREE.Box3().setFromObject(model).getCenter(new THREE.Vector3());
+        model.position.sub(center);
+
+        // Lock in this "standing up straight, facing the camera" orientation
+        // as a fixed reference. The spin animation rotates AROUND this
+        // instead of overwriting rotation.x/y/z directly — that's what was
+        // causing the model to tip over into a handstand as the spin angle
+        // grew large.
+        baseQuaternion = model.quaternion.clone();
+      }
+
+      loader.load(
+        '3d/lanka.glb',
+        (gltf) => {
+          lankaModel = gltf.scene;
+          colorizeByProvince(lankaModel);
+          fitModelToView(lankaModel);
+          scene.add(lankaModel);
+        },
+        undefined,
+        (error) => {
+          console.error('Could not load 3d/lanka.glb', error);
+        }
+      );
+
+      function animateModel() {
+        requestAnimationFrame(animateModel);
+
+        if (lankaModel && baseQuaternion) {
+          const elapsed = clock.getElapsedTime();
+
+          // Spin around the WORLD vertical axis, applied on top of the
+          // fixed "standing straight" orientation — like a globe turning
+          // on a stand, instead of tumbling through Euler angles.
+          const spinQuaternion = new THREE.Quaternion().setFromAxisAngle(
+            worldUp,
+            elapsed * SPIN_SPEED
+          );
+          lankaModel.quaternion.copy(spinQuaternion).multiply(baseQuaternion);
+        }
+
+        renderer.render(scene, camera);
+      }
+
+      window.addEventListener('resize', resizeModel);
+      resizeModel();
+      animateModel();
+    }
+  </script>
+</body>
+</html>

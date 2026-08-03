@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotels in Ella | Tourism In Sri Lanka</title>
+  <link rel="icon" type="image/png" href="../favicon_io/favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="destination-hotels.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-left">
+      <span class="logo-text">
+        <span class="logo-green">Tourism In</span>
+        <span class="logo-gold"> Sri Lanka</span>
+      </span>
+    </div>
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../sections/destinations.html">Destination</a>
+      <a href="../sections/articles.html">Article</a>
+      <a href="#">About Us</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+
+  <main class="dest-hotels-page">
+
+    <!-- HERO -->
+    <section class="dest-hero" style="background-image: url('../images_desitinations/image-place-2.jpg');">
+      <div class="dest-hero-overlay"></div>
+      <div class="dest-hero-content">
+        <p class="dest-hero-eyebrow">Uva Province · Badulla District</p>
+        <h1>Hotels &amp; Stays in <span class="accent">Ella</span></h1>
+        <p class="dest-hero-sub">Misty hill country, tea-plantation views, and the Nine Arches Bridge — find your stay in the clouds.</p>
+      </div>
+
+      <div class="dest-search-wrap">
+        <div class="dest-search-card">
+          <div class="dest-search-fields">
+            <div class="field">
+              <label>Location</label>
+              <div class="field-pill">Ella, Sri Lanka</div>
+            </div>
+            <div class="field">
+              <label>Check In</label>
+              <div class="field-pill">05 Dec, 2025</div>
+            </div>
+            <div class="field">
+              <label>Check Out</label>
+              <div class="field-pill">10 Dec, 2025</div>
+            </div>
+            <div class="field">
+              <label>Travellers</label>
+              <div class="field-pill">2 Adults, 1 Room</div>
+            </div>
+            <button type="button" class="dest-search-btn">Search</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTERS -->
+    <section class="dest-filters" aria-label="Hotel filters">
+      <div class="dest-filters-inner">
+        <button class="filter-btn active" data-filter="all">All Stays</button>
+        <button class="filter-btn" data-filter="couples">Couples</button>
+        <button class="filter-btn" data-filter="families">Families</button>
+        <button class="filter-btn" data-filter="solo">Solo</button>
+        <button class="filter-btn" data-filter="adventures">Adventures</button>
+      </div>
+      <p class="dest-results-count" id="resultsCount">5 stays found</p>
+    </section>
+
+    <!-- HOTEL GRID -->
+    <section class="hotel-grid" id="hotelGrid">
+
+      <article class="hotel-card" data-tags="couples adventures">
+        <div class="hotel-card-img">
+          <img src="../images_desitinations/ella-hotel-nine-arches-view.jpg" alt="Nine Arches View Lodge">
+          <span class="hotel-badge">Editor's Pick</span>
+        </div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-top">
+            <h3>Nine Arches View Lodge</h3>
+            <span class="hotel-rating">★ 4.8</span>
+          </div>
+          <p class="hotel-location">Ella, Badulla District</p>
+          <p class="hotel-blurb">Wake up to trains crossing the Nine Arches Bridge, framed by mist-covered hills.</p>
+          <div class="hotel-card-bottom">
+            <span class="hotel-price"><strong>$150</strong> / night</span>
+            <a href="https://www.booking.com/searchresults.html?ss=Nine+Arches+View+Lodge+Ella+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="hotel-card" data-tags="couples families">
+        <div class="hotel-card-img">
+          <img src="../images_desitinations/ella-hotel-tea-cottage.jpg" alt="Ella Gap Tea Cottage">
+          <span class="hotel-badge">Heritage Stay</span>
+        </div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-top">
+            <h3>Ella Gap Tea Cottage</h3>
+            <span class="hotel-rating">★ 4.7</span>
+          </div>
+          <p class="hotel-location">Ella, Badulla District</p>
+          <p class="hotel-blurb">A working tea estate cottage overlooking the Ella Gap, with fireside evenings included.</p>
+          <div class="hotel-card-bottom">
+            <span class="hotel-price"><strong>$135</strong> / night</span>
+            <a href="https://www.booking.com/searchresults.html?ss=Ella+Gap+Tea+Cottage+Ella+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="hotel-card" data-tags="couples solo">
+        <div class="hotel-card-img">
+          <img src="../images_desitinations/ella-hotel-misty-ridge.jpg" alt="Misty Ridge Boutique Hotel">
+        </div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-top">
+            <h3>Misty Ridge Boutique Hotel</h3>
+            <span class="hotel-rating">★ 4.9</span>
+          </div>
+          <p class="hotel-location">Ella, Badulla District</p>
+          <p class="hotel-blurb">Infinity pool suspended over the valley, with floor-to-ceiling views of Little Adam's Peak.</p>
+          <div class="hotel-card-bottom">
+            <span class="hotel-price"><strong>$210</strong> / night</span>
+            <a href="https://www.booking.com/searchresults.html?ss=Misty+Ridge+Boutique+Hotel+Ella+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="hotel-card" data-tags="adventures solo">
+        <div class="hotel-card-img">
+          <img src="../images_desitinations/ella-hotel-flying-ravana.jpg" alt="Flying Ravana Eco Camp">
+          <span class="hotel-badge">Adventure Camp</span>
+        </div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-top">
+            <h3>Flying Ravana Eco Camp</h3>
+            <span class="hotel-rating">★ 4.6</span>
+          </div>
+          <p class="hotel-location">Ella, near Ella Rock trailhead</p>
+          <p class="hotel-blurb">Canvas cabins at the foot of the hiking trail — early starts for Ella Rock and Little Adam's Peak.</p>
+          <div class="hotel-card-bottom">
+            <span class="hotel-price"><strong>$70</strong> / night</span>
+            <a href="https://www.booking.com/searchresults.html?ss=Flying+Ravana+Eco+Camp+Ella+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="hotel-card" data-tags="solo families">
+        <div class="hotel-card-img">
+          <img src="../images_desitinations/ella-hotel-backpackers-inn.jpg" alt="Ella Rock Backpackers Inn">
+        </div>
+        <div class="hotel-card-body">
+          <div class="hotel-card-top">
+            <h3>Ella Rock Backpackers Inn</h3>
+            <span class="hotel-rating">★ 4.4</span>
+          </div>
+          <p class="hotel-location">Ella town centre</p>
+          <p class="hotel-blurb">Friendly budget stay two minutes from the train station, with a rooftop common area.</p>
+          <div class="hotel-card-bottom">
+            <span class="hotel-price"><strong>$40</strong> / night</span>
+            <a href="https://www.booking.com/searchresults.html?ss=Ella+Rock+Backpackers+Inn+Ella+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="footer-grid">
+      <div>
+        <p>Travel makes one modest, you see what a tiny place you occupy in the world. Explore Sri Lanka and create memories that last a lifetime.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For Travellers</h4>
+        <ul>
+          <li><a href="#">Why us</a></li>
+          <li><a href="#">Why Touring</a></li>
+          <li><a href="#">Share your review</a></li>
+          <li><a href="#">Travel Insurance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact Info</h4>
+        <p>+94786480244</p>
+        <p>Sri Lanka</p>
+        <p>support@tourisminsrilanka.com</p>
+      </div>
+    </div>
+    <div class="copyright">Copyright © 2023 Tourism In Sri Lanka</div>
+  </footer>
+
+  <script>
+    (function () {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.hotel-card');
+      const countLabel = document.getElementById('resultsCount');
+
+      function updateCount(filter) {
+        const visible = filter === 'all'
+          ? cards.length
+          : Array.from(cards).filter(c => (c.getAttribute('data-tags') || '').includes(filter)).length;
+        countLabel.textContent = `${visible} stay${visible === 1 ? '' : 's'} found`;
+      }
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach((item) => item.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.getAttribute('data-filter');
+
+          cards.forEach((card) => {
+            const tags = card.getAttribute('data-tags') || '';
+            card.style.display = (filter === 'all' || tags.includes(filter)) ? 'flex' : 'none';
+          });
+
+          updateCount(filter);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

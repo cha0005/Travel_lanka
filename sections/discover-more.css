@@ -1,0 +1,308 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap");
+
+:root {
+  --text: #1f2328;
+  --muted: #4f5661;
+  --card-bg: rgba(248, 250, 252, 0.84);
+  --card-border: rgba(32, 40, 51, 0.28);
+  --footer-bg-1: #2f3237;
+  --footer-bg-2: #3a3535;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+}
+
+body {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    linear-gradient(rgba(240, 244, 248, 0.72), rgba(240, 244, 248, 0.82)),
+    url("../images_desitinations/feature-hero.jpg") center/cover fixed no-repeat;
+  overflow-x: hidden;
+}
+
+.discover-page {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 56px 28px 96px;
+  transition: opacity 0.32s ease, transform 0.32s ease;
+}
+
+.page-title {
+  font-family: "Cinzel Decorative", "Times New Roman", serif;
+  text-align: center;
+  font-size: clamp(40px, 4vw, 64px);
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  margin: 0 0 54px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+body.page-ready .page-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(250px, 1fr));
+  gap: 28px 24px;
+}
+
+.spot-card {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.24),
+    rgba(255, 255, 255, 0.08)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 16px;
+  min-height: 280px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  padding: 8px 8px 20px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 0 14px rgba(255, 255, 255, 0.24);
+  opacity: 0;
+  transform: translateY(24px) scale(0.985);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.spot-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -25%;
+  width: 70%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.46),
+    rgba(255, 255, 255, 0.14) 45%,
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.spot-card::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 42%;
+  height: 30%;
+  pointer-events: none;
+  border-radius: 14px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(255, 255, 255, 0.12) 48%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  filter: blur(0.5px);
+}
+
+.spot-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.spot-image {
+  height: 112px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.45s ease, filter 0.45s ease;
+}
+
+.spot-card h3 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(18px, 1.2vw, 24px);
+  line-height: 1.14;
+  font-weight: 500;
+  margin: 10px 10px 6px;
+}
+
+.spot-card p {
+  font-family: "Times New Roman", Times, serif;
+  min-height: 30px;
+  font-size: clamp(11px, 0.72vw, 12px);
+  color: var(--muted);
+  margin: 0 12px 28px;
+}
+
+.card-arrow {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid #243341;
+  border-radius: 999px;
+  font-size: 22px;
+  line-height: 26px;
+  color: #243341;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.spot-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 36px rgba(15, 23, 42, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.64),
+    inset 0 0 22px rgba(255, 255, 255, 0.32);
+  border-color: rgba(255, 255, 255, 0.62);
+}
+
+.spot-card:hover .spot-image {
+  transform: scale(1.06);
+  filter: saturate(1.08);
+}
+
+.spot-card:hover .card-arrow {
+  transform: translateX(4px);
+  background-color: rgba(36, 51, 65, 0.1);
+}
+
+.centered-last-row:nth-last-child(2) {
+  grid-column: 2;
+}
+
+.centered-last-row:nth-last-child(1) {
+  grid-column: 3;
+}
+
+.footer {
+  background: linear-gradient(90deg, var(--footer-bg-1), var(--footer-bg-2));
+  color: #d8d8d8;
+  margin-top: 8px;
+  padding: 44px 0 0;
+  transition: opacity 0.32s ease, transform 0.32s ease;
+}
+
+body.page-exit .discover-page,
+body.page-exit .footer {
+  opacity: 0;
+  transform: translateY(16px) scale(0.99);
+}
+
+.footer-grid {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr;
+  gap: 34px;
+  padding: 0 28px 34px;
+}
+
+.footer h4 {
+  font-size: clamp(20px, 1.7vw, 30px);
+  font-weight: 500;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #d2d2d2;
+  padding-bottom: 6px;
+}
+
+.footer p,
+.footer li,
+.footer a {
+  font-size: clamp(14px, 1vw, 17px);
+  line-height: 1.75;
+  color: #e2e2e2;
+  text-decoration: none;
+}
+
+.footer ul {
+  list-style: disc;
+  padding-left: 22px;
+}
+
+.copyright {
+  text-align: center;
+  font-size: clamp(14px, 1vw, 18px);
+  border-top: 1px solid #7a7a7a;
+  padding: 18px 0;
+}
+
+@media (max-width: 1160px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+  }
+
+  .centered-last-row:nth-last-child(2),
+  .centered-last-row:nth-last-child(1) {
+    grid-column: auto;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 840px) {
+  .discover-page {
+    padding: 34px 16px 70px;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+    gap: 18px 16px;
+  }
+
+  .spot-card {
+    min-height: 240px;
+  }
+
+  .spot-image {
+    height: 94px;
+  }
+
+  .spot-card h3 {
+    font-size: 20px;
+  }
+
+  .spot-card p {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 560px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .spot-card h3 {
+    font-size: 19px;
+  }
+
+  .spot-card p {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sri Lanka Drive</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a1a0f;font-family:Georgia,serif}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block}
+
+.poi-layer{position:fixed;inset:0;z-index:9;pointer-events:none}
+
+.hud{position:fixed;inset:0;z-index:10;pointer-events:none}
+
+.top-left{position:absolute;top:28px;left:28px;pointer-events:none}
+.title-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,230,200,.55);margin-bottom:6px}
+.title-main{font-size:clamp(32px,4vw,52px);line-height:1;color:#e8f5e8;text-shadow:0 0 60px rgba(80,200,120,.18)}
+.title-sub{margin-top:8px;font-family:Arial,sans-serif;font-size:13px;color:rgba(180,220,180,.55);max-width:280px;line-height:1.55}
+
+.destination-panel{margin-top:14px;pointer-events:auto;display:flex;flex-direction:column;gap:7px;max-width:320px}
+.destination-panel label{font-family:Arial,sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(170,220,180,.5)}
+.destination-select{appearance:none;background:rgba(8,20,12,.75);color:#eaf6ea;border:1px solid rgba(120,210,140,.18);backdrop-filter:blur(12px);border-radius:14px;padding:10px 14px;font-family:Arial,sans-serif;font-size:13px;min-width:260px;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.destination-select:focus{outline:none;border-color:rgba(120,210,140,.36);box-shadow:0 0 0 2px rgba(80,160,95,.18),0 12px 30px rgba(0,0,0,.18)}
+
+.destination-spots{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;max-width:min(420px,calc(100vw - 56px));pointer-events:auto}
+.spot-chip{position:relative;display:inline-flex;align-items:center;gap:8px;background:rgba(8,20,12,.74);border:1px solid rgba(120,210,140,.18);backdrop-filter:blur(12px);border-radius:999px;padding:7px 12px;font-family:Arial,sans-serif;font-size:11px;color:#eaf6ea;cursor:default}
+.spot-chip:hover{background:rgba(50,130,70,.22)}
+.spot-chip .poi-bubble{left:0;transform:none;bottom:calc(100% + 10px)}
+.spot-chip:hover .poi-bubble{opacity:1;transform:none}
+
+.poi-label{position:absolute;left:0;top:0;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:auto;opacity:0;transition:opacity .16s ease,transform .16s ease;will-change:transform,opacity}
+.poi-label.visible{opacity:1}
+.poi-pin{display:inline-flex;align-items:center;gap:8px;background:rgba(9,22,13,.76);border:1px solid rgba(120,210,140,.22);backdrop-filter:blur(12px);border-radius:999px;padding:7px 12px;font-family:Arial,sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#dff5e3;white-space:nowrap;box-shadow:0 10px 24px rgba(0,0,0,.15)}
+.poi-dot{width:9px;height:9px;border-radius:50%;background:#b9ffcf;box-shadow:0 0 0 6px rgba(185,255,207,.12)}
+.poi-bubble{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);min-width:220px;max-width:260px;background:rgba(6,18,10,.94);border:1px solid rgba(120,210,140,.2);border-radius:14px;padding:10px 12px;font-family:Arial,sans-serif;color:rgba(230,245,232,.85);font-size:12px;line-height:1.45;opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease;box-shadow:0 16px 34px rgba(0,0,0,.24)}
+.poi-label:hover .poi-bubble,.poi-label:focus-within .poi-bubble{opacity:1;transform:translateX(-50%) translateY(0)}
+.poi-label:hover .poi-pin,.poi-label:focus-within .poi-pin{background:rgba(55,140,74,.26);border-color:rgba(145,235,160,.35)}
+
+.stats-row{position:absolute;top:28px;right:28px;display:flex;gap:10px}
+.stat-pill{background:rgba(8,20,12,.65);border:1px solid rgba(100,200,120,.15);backdrop-filter:blur(12px);border-radius:999px;padding:8px 16px;display:flex;flex-direction:column;align-items:center}
+.stat-pill span{font-family:Arial,sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(160,210,170,.5);margin-bottom:2px}
+.stat-pill strong{font-size:16px;color:#d4f0d8}
+
+.bottom-bar{position:absolute;bottom:28px;left:28px;right:28px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.mission-box{background:rgba(8,20,12,.62);border:1px solid rgba(100,200,120,.13);backdrop-filter:blur(14px);border-radius:18px;padding:16px 20px;max-width:400px;pointer-events:auto}
+.mission-box h2{font-size:17px;color:#c8ecd0;margin-bottom:6px}
+.mission-box p{font-family:Arial,sans-serif;font-size:13px;color:rgba(170,220,180,.65);line-height:1.55;margin-bottom:10px}
+.keys{display:flex;gap:6px;flex-wrap:wrap}
+.key{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:5px 10px;font-family:Arial,sans-serif;font-size:11px;color:rgba(255,255,255,.7)}
+
+.d-pad{display:grid;grid-template-columns:repeat(3,48px);grid-template-rows:repeat(2,48px);gap:8px;pointer-events:auto}
+.d-btn{width:48px;height:48px;border:0;border-radius:14px;background:rgba(10,30,15,.7);border:1px solid rgba(100,200,120,.2);color:rgba(200,240,200,.8);font-size:18px;cursor:pointer;backdrop-filter:blur(10px);transition:background .1s,transform .1s}
+.d-btn:active,.d-btn.on{background:rgba(50,160,80,.25);transform:scale(.95)}
+.d-btn.up{grid-column:2;grid-row:1}
+.d-btn.lt{grid-column:1;grid-row:2}
+.d-btn.dn{grid-column:2;grid-row:2}
+.d-btn.rt{grid-column:3;grid-row:2}
+
+.zone-tag{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);background:rgba(8,20,12,.72);border:1px solid rgba(100,200,120,.16);backdrop-filter:blur(12px);border-radius:999px;padding:8px 20px;font-family:Arial,sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(180,240,190,.7);transition:opacity .4s}
+
+.finish-banner{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(8,20,12,.92);border:1px solid rgba(100,200,120,.3);border-radius:20px;padding:28px 40px;text-align:center;z-index:20;opacity:0;pointer-events:none;transition:opacity .5s}
+.finish-banner h2{font-size:26px;color:#a8e8b8;margin-bottom:8px}
+.finish-banner p{font-family:Arial,sans-serif;font-size:14px;color:rgba(170,220,180,.7)}
+.finish-banner.show{opacity:1}
+
+@media(max-width:600px){
+  .top-left{top:14px;left:14px}
+  .stats-row{top:14px;right:14px;gap:6px}
+  .bottom-bar{bottom:14px;left:14px;right:14px}
+  .title-main{font-size:28px}
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="poi-layer" id="poi-layer"></div>
+
+<div class="hud">
+  <div class="top-left">
+    <div class="title-label">Sri Lanka Drive</div>
+    <h1 class="title-main">Island Trail</h1>
+    <p class="title-sub">Navigate through ancient landscape, collect the shrine relics.</p>
+    <div class="destination-panel">
+      <label for="destination-select">Destination</label>
+      <select id="destination-select" class="destination-select"></select>
+    </div>
+    <div class="destination-spots" id="destination-spots"></div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-pill"><span>Relics</span><strong id="relic-ct">0 / 5</strong></div>
+    <div class="stat-pill"><span>Speed</span><strong id="speed-ct">0 km/h</strong></div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="mission-box">
+      <h2>Mission</h2>
+      <p id="mission-txt">Drive the trail and collect all 5 glowing relics to illuminate the shrine.</p>
+      <div class="keys">
+        <span class="key">W / ↑ Forward</span>
+        <span class="key">S / ↓ Brake</span>
+        <span class="key">A / ← Left</span>
+        <span class="key">D / → Right</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="d-pad">
+        <button class="d-btn up" data-k="f">▲</button>
+        <button class="d-btn lt" data-k="l">◀</button>
+        <button class="d-btn dn" data-k="b">▼</button>
+        <button class="d-btn rt" data-k="r">▶</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="zone-tag" id="zone-tag">Trail Start</div>
+</div>
+
+<div class="finish-banner" id="finish">
+  <h2>Shrine Illuminated</h2>
+  <p>You collected every relic. The ancient path is complete.</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+<script>
+(function(){
+const W=window,canvas=document.getElementById('c');
+const relicCtEl=document.getElementById('relic-ct');
+const speedEl=document.getElementById('speed-ct');
+const zoneEl=document.getElementById('zone-tag');
+const missionEl=document.getElementById('mission-txt');
+const finishEl=document.getElementById('finish');
+const poiLayer=document.getElementById('poi-layer');
+const destinationSelect=document.getElementById('destination-select');
+const destinationSpotsEl=document.getElementById('destination-spots');
+
+// --- Renderer ---
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.1;
+
+// --- Scene ---
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x0a1a0f,0.018);
+scene.background=new THREE.Color(0x061410);
+
+// --- Camera ---
+const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,.1,600);
+camera.position.set(0,6,16);
+
+// --- Lights ---
+const ambient=new THREE.AmbientLight(0x1a3d20,2.2);
+scene.add(ambient);
+
+const sun=new THREE.DirectionalLight(0xfff0d0,2.8);
+sun.position.set(40,80,30);
+sun.castShadow=true;
+sun.shadow.mapSize.width=2048;
+sun.shadow.mapSize.height=2048;
+sun.shadow.camera.near=1;
+sun.shadow.camera.far=300;
+sun.shadow.camera.left=-120;
+sun.shadow.camera.right=120;
+sun.shadow.camera.top=120;
+sun.shadow.camera.bottom=-120;
+sun.shadow.bias=-0.001;
+scene.add(sun);
+
+const fillLight=new THREE.DirectionalLight(0x204060,1.2);
+fillLight.position.set(-30,20,-20);
+scene.add(fillLight);
+
+const rimLight=new THREE.PointLight(0x80ffaa,1.5,80);
+rimLight.position.set(-20,12,-10);
+scene.add(rimLight);
+
+// --- Sky dome ---
+(function(){
+  const geo=new THREE.SphereGeometry(500,16,8);
+  const mat=new THREE.ShaderMaterial({
+    uniforms:{topColor:{value:new THREE.Color(0x061818)},botColor:{value:new THREE.Color(0x0d2a15)}},
+    vertexShader:`varying float v;void main(){v=normalize(position).y;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+    fragmentShader:`varying float v;uniform vec3 topColor,botColor;void main(){float t=clamp(v*.5+.5,0.,1.);gl_FragColor=vec4(mix(botColor,topColor,t),1.);}`,
+    side:THREE.BackSide
+  });
+  scene.add(new THREE.Mesh(geo,mat));
+})();
+
+// --- Ground ---
+(function(){
+  const geo=new THREE.PlaneGeometry(400,400,80,80);
+  const pos=geo.attributes.position;
+  for(let i=0;i<pos.count;i++){
+    const x=pos.getX(i),z=pos.getZ(i);
+    pos.setY(i,Math.sin(x*.08)*Math.cos(z*.06)*0.9+Math.sin(x*.03+z*.04)*1.2);
+  }
+  geo.computeVertexNormals();
+  const mat=new THREE.MeshLambertMaterial({color:0x1a4a22});
+  const ground=new THREE.Mesh(geo,mat);
+  ground.rotation.x=-Math.PI/2;
+  ground.receiveShadow=true;
+  scene.add(ground);
+})();
+
+// --- Road ---
+(function(){
+  const pts=[
+    new THREE.Vector3(-2,0.02,90),
+    new THREE.Vector3(-4,0.02,70),
+    new THREE.Vector3(-6,0.02,50),
+    new THREE.Vector3(-5,0.02,30),
+    new THREE.Vector3(-2,0.02,10),
+    new THREE.Vector3(3,0.02,-10),
+    new THREE.Vector3(8,0.02,-30),
+    new THREE.Vector3(10,0.02,-50),
+    new THREE.Vector3(8,0.02,-70),
+    new THREE.Vector3(4,0.02,-90),
+    new THREE.Vector3(0,0.02,-110)
+  ];
+  const curve=new THREE.CatmullRomCurve3(pts);
+  const divisions=120;
+  const curvePts=curve.getPoints(divisions);
+
+  for(let i=0;i<divisions;i++){
+    const a=curvePts[i],b=curvePts[i+1];
+    const dir=new THREE.Vector3().subVectors(b,a).normalize();
+    const perp=new THREE.Vector3(-dir.z,0,dir.x);
+    const w=3.5;
+    const verts=new Float32Array([
+      a.x-perp.x*w,a.y,a.z-perp.z*w,
+      a.x+perp.x*w,a.y,a.z+perp.z*w,
+      b.x+perp.x*w,b.y,b.z+perp.z*w,
+      b.x-perp.x*w,b.y,b.z-perp.z*w
+    ]);
+    const idx=new Uint16Array([0,1,2,0,2,3]);
+    const g=new THREE.BufferGeometry();
+    g.setAttribute('position',new THREE.BufferAttribute(verts,3));
+    g.setIndex(new THREE.BufferAttribute(idx,1));
+    g.computeVertexNormals();
+    const m=new THREE.Mesh(g,new THREE.MeshLambertMaterial({color:0x3d2e1a}));
+    m.receiveShadow=true;
+    scene.add(m);
+  }
+})();
+
+// --- Trees ---
+function makeTree(x,z,h,r){
+  const g=new THREE.Group();
+  const trunkG=new THREE.CylinderGeometry(r*.12,r*.18,h*.35,6);
+  const trunk=new THREE.Mesh(trunkG,new THREE.MeshLambertMaterial({color:0x3b2510}));
+  trunk.castShadow=true;
+  trunk.position.y=h*.175;
+  g.add(trunk);
+  [[0,h*.52,0,r,.8],[0,h*.75,0,r*.72,.7],[-r*.35,h*.48,0,r*.5,.65],[r*.3,h*.5,0,r*.55,.65]].forEach(([ox,oy,oz,cr,dr])=>{
+    const geo=new THREE.SphereGeometry(cr,7,5);
+    const col=new THREE.Color(0x1a5c28).lerp(new THREE.Color(0x2a8040),Math.random()*.6);
+    const mesh=new THREE.Mesh(geo,new THREE.MeshLambertMaterial({color:col}));
+    mesh.position.set(ox,oy,oz);
+    mesh.castShadow=true;
+    g.add(mesh);
+  });
+  g.position.set(x,0,z);
+  scene.add(g);
+}
+
+const treePts=[
+  [-18,60],[-14,45],[-22,38],[-28,25],[-24,12],[-18,0],[-14,-10],[-8,-22],[-4,-34],
+  [2,-46],[8,-58],[12,-70],[16,-82],[12,-95],
+  [22,55],[28,42],[32,28],[30,15],[26,2],[24,-12],[22,-26],[26,-40],[28,-55],[24,-70],[20,-86],
+  [-35,50],[-40,35],[-38,20],[-42,5],[-36,-10],[-32,-25],
+  [38,48],[44,30],[46,10],[42,-8],[38,-28],[40,-48]
+];
+treePts.forEach(([x,z])=>makeTree(x,z,4+Math.random()*3,1.2+Math.random()*.8));
+
+// --- Rocks ---
+function makeRock(x,z){
+  const g=new THREE.DodecahedronGeometry(.6+Math.random()*.9,0);
+  const m=new THREE.Mesh(g,new THREE.MeshLambertMaterial({color:0x4a4035}));
+  m.castShadow=true;
+  m.position.set(x,.3,z);
+  m.rotation.set(Math.random()*Math.PI,Math.random()*Math.PI,Math.random()*Math.PI);
+  scene.add(m);
+}
+[[-12,38],[16,20],[-8,-5],[22,-18],[10,-42],[-6,-60],[18,-80],[-14,-70],[-30,15],[35,-35],[28,-62]].forEach(([x,z])=>makeRock(x,z));
+
+// --- Visible buildings near the start so the 3D scene reads immediately ---
+function makeBuildingBlock(x,z,w,h,d,color){
+  const g=new THREE.Group();
+  const body=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshLambertMaterial({color}));
+  body.castShadow=true;
+  body.receiveShadow=true;
+  body.position.y=h/2;
+  g.add(body);
+
+  const roof=new THREE.Mesh(new THREE.ConeGeometry(Math.max(w,d)*0.62,h*0.28,4),new THREE.MeshLambertMaterial({color:0x5d3a1b}));
+  roof.rotation.y=Math.PI/4;
+  roof.position.y=h+h*0.14;
+  roof.castShadow=true;
+  g.add(roof);
+
+  const windowMat=new THREE.MeshLambertMaterial({color:0xd7f1ff,emissive:0xbcecff,emissiveIntensity:0.25});
+  for(let row=0;row<2;row++){
+    for(let col=0;col<2;col++){
+      const win=new THREE.Mesh(new THREE.BoxGeometry(w*0.14,h*0.12,0.05),windowMat);
+      win.position.set((col?1:-1)*w*0.22,h*0.4+row*h*0.18,d/2+0.03);
+      g.add(win);
+    }
+  }
+
+  g.position.set(x,0,z);
+  scene.add(g);
+}
+
+makeBuildingBlock(-10,92,8.0,16.0,7.0,0xb99368);
+makeBuildingBlock(12,88,9.0,18.0,7.5,0xa87c53);
+makeBuildingBlock(-14,76,7.0,14.0,6.5,0xb6a07c);
+makeBuildingBlock(15,66,8.0,15.0,6.8,0xb28d67);
+makeBuildingBlock(-12,54,7.5,14.0,6.8,0xae7d4f);
+
+// --- Bamboo gate ---
+function makeBambooGate(x,z){
+  const mat=new THREE.MeshLambertMaterial({color:0x8a9a30});
+  function post(px,pz,h){
+    const g=new THREE.CylinderGeometry(.15,.2,h,6);
+    const m=new THREE.Mesh(g,mat);
+    m.position.set(px,h/2,pz);
+    m.castShadow=true;
+    scene.add(m);
+  }
+  function bar(x1,x2,y,pz){
+    const len=Math.abs(x2-x1);
+    const g=new THREE.CylinderGeometry(.1,.1,len,6);
+    const m=new THREE.Mesh(g,mat);
+    m.rotation.z=Math.PI/2;
+    m.position.set((x1+x2)/2,y,pz);
+    m.castShadow=true;
+    scene.add(m);
+  }
+  post(x-4,z,6);
+  post(x+4,z,6);
+  bar(x-4,x+4,5.5,z);
+  bar(x-4,x+4,4.2,z);
+}
+makeBambooGate(-2,20);
+makeBambooGate(5,-48);
+
+// --- Shrine ---
+(function(){
+  const base=new THREE.Mesh(new THREE.CylinderGeometry(3,3.5,.6,12),new THREE.MeshLambertMaterial({color:0x8a7050}));
+  base.position.set(6,.3,-95);
+  base.castShadow=true;
+  scene.add(base);
+
+  const body=new THREE.Mesh(new THREE.CylinderGeometry(1.2,2,4,8),new THREE.MeshLambertMaterial({color:0xc8a870}));
+  body.position.set(6,2.8,-95);
+  body.castShadow=true;
+  scene.add(body);
+
+  const roof=new THREE.Mesh(new THREE.ConeGeometry(3,2.5,8),new THREE.MeshLambertMaterial({color:0x8b1a1a}));
+  roof.position.set(6,6.5,-95);
+  roof.castShadow=true;
+  scene.add(roof);
+
+  const tip=new THREE.Mesh(new THREE.SphereGeometry(.4,8,6),new THREE.MeshLambertMaterial({color:0xf0c040}));
+  tip.position.set(6,8,-95);
+  scene.add(tip);
+
+  const glow=new THREE.PointLight(0xffa040,0,30);
+  glow.position.set(6,5,-95);
+  scene.add(glow);
+  scene._shrineLight=glow;
+})();
+
+// --- Relics ---
+const relicDefs=[
+  {x:-4,z:40},{x:-2,z:10},{x:4,z:-20},{x:8,z:-52},{x:6,z:-80}
+];
+const relicMeshes=[];
+const relicCollected=[false,false,false,false,false];
+let totalCollected=0;
+
+relicDefs.forEach((def,i)=>{
+  const g=new THREE.Group();
+  const ring=new THREE.TorusGeometry(.6,.08,8,24);
+  const col=i%2===0?0xf0c040:0x40e8a0;
+  const rm=new THREE.Mesh(ring,new THREE.MeshLambertMaterial({color:col,emissive:new THREE.Color(col),emissiveIntensity:.6}));
+  g.add(rm);
+  const inner=new THREE.Mesh(new THREE.SphereGeometry(.25,10,8),new THREE.MeshLambertMaterial({color:0xffffff,emissive:new THREE.Color(0xffffff),emissiveIntensity:.4}));
+  g.add(inner);
+  const pl=new THREE.PointLight(col,.9,8);
+  g.add(pl);
+  g.position.set(def.x,1.4,def.z);
+  scene.add(g);
+  relicMeshes.push({group:g,base:def.z,idx:i});
+});
+
+const destinationCatalog={
+  sigiriya:{
+    label:'Sigiriya',
+    focus:'Matale District, Central Province',
+    mission:'Explore the Sigiriya cluster: rock fortress, sunrise viewpoints, and nearby heritage stops.',
+    theme:{body:0xb99061,roof:0x7c4b23,accent:0xf3deaf},
+    spots:[
+      {name:'Lion Rock Fortress',desc:'Climb the ancient fortress and explore the fresco-lined ascent.',w:8,h:16,d:7,x:-14},
+      {name:'Pidurangala Sunrise',desc:'Opposite the rock, this viewpoint is ideal for sunrise and wide valley shots.',w:7,h:11,d:6,x:14},
+      {name:'Dambulla Cave Temple',desc:'Sacred caves, painted ceilings, and one of the best day trips from Sigiriya.',w:8,h:13,d:6,x:-11}
+    ]
+  },
+  ella:{
+    label:'Ella',
+    focus:'Badulla District, Uva Province',
+    mission:"Explore Ella's mountain highlights, bridge viewpoints, and waterfall stops.",
+    theme:{body:0x8db97a,roof:0x4d6a31,accent:0xe7f4d7},
+    spots:[
+      {name:'Nine Arch Bridge',desc:'Walk the famous bridge and watch trains cross the green valley.',w:8,h:12,d:6,x:-15},
+      {name:'Ella Rock Trail',desc:'A classic ridge hike with panoramic hill-country views.',w:7,h:14,d:6,x:13},
+      {name:'Ravana Falls',desc:'A scenic waterfall stop on the way through the highlands.',w:7,h:10,d:5,x:-10}
+    ]
+  },
+  galleFort:{
+    label:'Galle Fort',
+    focus:'Southern Province',
+    mission:'Discover the fortified heritage walk, lighthouses, and colonial streets of Galle Fort.',
+    theme:{body:0xb7926d,roof:0x8c5b36,accent:0xf4eadf},
+    spots:[
+      {name:'Lighthouse Bastion',desc:'The iconic white lighthouse at the edge of the fort walls.',w:8,h:13,d:6,x:-13},
+      {name:'Rampart Walk',desc:'A sunset stroll along the ramparts with the Indian Ocean below.',w:8,h:11,d:6,x:13},
+      {name:'Dutch Hospital Arcade',desc:'Historic shopping and dining in a restored colonial complex.',w:8,h:12,d:6,x:-9}
+    ]
+  },
+  kandy:{
+    label:'Kandy',
+    focus:'Central Province',
+    mission:'Tour the cultural capital with temple, lake, and forest-edge landmarks.',
+    theme:{body:0xac8a5f,roof:0x5f3a1d,accent:0xf2e1c8},
+    spots:[
+      {name:'Temple of the Tooth',desc:"Sri Lanka's most famous sacred temple and major pilgrimage site.",w:8,h:15,d:7,x:-14},
+      {name:'Kandy Lake Promenade',desc:'A peaceful loop with reflections, birds, and city views.',w:7,h:11,d:6,x:14},
+      {name:'Udawatta Kele',desc:'A forest reserve close to the city center and ideal for short walks.',w:7,h:12,d:6,x:-10}
+    ]
+  },
+  yala:{
+    label:'Yala',
+    focus:'Southern Wildlife Zone',
+    mission:'Explore the wildlife corridor with safari gates, lookouts, and lagoon-side stops.',
+    theme:{body:0x8ea56a,roof:0x4b5f2e,accent:0xe9f4cf},
+    spots:[
+      {name:'Safari Gate',desc:"Start point for jeep safaris into Sri Lanka's best-known national park.",w:8,h:13,d:6,x:-14},
+      {name:'Leopard Lookout',desc:'A raised lookout for spotting wildlife and open scrubland.',w:7,h:11,d:5,x:14},
+      {name:'Patanangala Beach',desc:'Remote coastline where the jungle meets the sea.',w:8,h:10,d:6,x:-11}
+    ]
+  },
+  nuwaraEliya:{
+    label:'Nuwara Eliya',
+    focus:'Hill Country',
+    mission:'Visit the cool-climate hill-town highlights and tea-country landmarks.',
+    theme:{body:0xa9c4da,roof:0x587085,accent:0xf0f7ff},
+    spots:[
+      {name:'Gregory Lake',desc:'Lakeside walks, boat rides, and a relaxed hill-town atmosphere.',w:8,h:12,d:6,x:-13},
+      {name:'Pedro Tea Estate',desc:'A tea factory and plantation walk with panoramic slopes.',w:7,h:11,d:6,x:13},
+      {name:'Horton Plains Base',desc:"Gateway to cloud forest hikes and the famous World's End trail.",w:8,h:13,d:6,x:-10}
+    ]
+  },
+  mirissa:{
+    label:'Mirissa',
+    focus:'Southern Coast',
+    mission:'Browse the whale-watching and beach-view stops around Mirissa.',
+    theme:{body:0xcfa47b,roof:0x8b5d36,accent:0xffefe0},
+    spots:[
+      {name:'Whale Watching Pier',desc:'Boarding point for seasonal blue whale and dolphin tours.',w:8,h:12,d:6,x:-13},
+      {name:'Coconut Tree Hill',desc:'A postcard-famous headland for sunrise and sunset views.',w:7,h:10,d:5,x:13},
+      {name:'Secret Beach',desc:'A sheltered cove for swimming, relaxing, and coastal walks.',w:7,h:11,d:5,x:-10}
+    ]
+  },
+  polonnaruwa:{
+    label:'Polonnaruwa',
+    focus:'North Central Province',
+    mission:'Explore the ancient city with temple ruins, reservoirs, and royal grounds.',
+    theme:{body:0xb8a06a,roof:0x6d4930,accent:0xf6ead0},
+    spots:[
+      {name:'Royal Palace Grounds',desc:'The heart of the ancient capital and a major archaeological stop.',w:8,h:14,d:7,x:-14},
+      {name:'Gal Vihara',desc:'Famous rock-cut Buddha statues carved from a single granite face.',w:7,h:12,d:6,x:14},
+      {name:'Parakrama Samudra',desc:'The great reservoir that shaped the city and its irrigation system.',w:8,h:11,d:6,x:-11}
+    ]
+  },
+  arugamBay:{
+    label:'Arugam Bay',
+    focus:'East Coast',
+    mission:'Check the surf town stops, lagoon edges, and relaxed east-coast hangouts.',
+    theme:{body:0xa9b48a,roof:0x66794a,accent:0xf3f6e9},
+    spots:[
+      {name:'Main Point Break',desc:'The classic surf point where the bay comes alive in season.',w:8,h:11,d:6,x:-13},
+      {name:'Pottuvil Lagoon',desc:'Mangroves, birdlife, and calm waters just inland from the coast.',w:7,h:10,d:5,x:13},
+      {name:'Crocodile Rock',desc:'A rugged coastal outcrop with memorable sunset views.',w:7,h:11,d:5,x:-10}
+    ]
+  },
+  jaffna:{
+    label:'Jaffna',
+    focus:'Northern Province',
+    mission:'See northern heritage stops from temples to the fort and island piers.',
+    theme:{body:0xc9b88d,roof:0x7a5a33,accent:0xf8efdd},
+    spots:[
+      {name:'Nallur Temple Street',desc:'Temple approach with lively ritual and street life.',w:8,h:13,d:6,x:-14},
+      {name:'Jaffna Fort Walls',desc:'A historic Dutch fort with strong geometric ramparts.',w:8,h:12,d:6,x:14},
+      {name:'Delft Island Pier',desc:'Gateway to island exploration, ferries, and coastal solitude.',w:7,h:10,d:5,x:-10}
+    ]
+  }
+};
+
+function getSettlementSpots(dest){
+  const baseX = dest.label === 'Galle Fort' ? 18 : dest.label === 'Yala' ? 16 : dest.label === 'Jaffna' ? 17 : 15;
+  return [
+    {name:`${dest.label} Guesthouse`,desc:`A small family-run stay where travelers can rest near the main route.`,kind:'guesthouse',w:6.6,h:8.5,d:5.4,x:-baseX+3,z:88,rotY:0,showLabel:false},
+    {name:`${dest.label} Local Home`,desc:`A lived-in home from the local neighborhood, showing the everyday side of the region.`,kind:'house',w:5.8,h:7.4,d:4.8,x:baseX-2,z:70,rotY:Math.PI/2,showLabel:false},
+    {name:`${dest.label} Tea & Snack Shop`,desc:`A tiny roadside stop for tea, snacks, and conversation with locals.`,kind:'shop',w:6.4,h:6.8,d:4.8,x:-baseX+1,z:52,rotY:0,showLabel:false},
+    {name:`${dest.label} Family Villa`,desc:`A larger home that gives the settlement a lived-in town feel.`,kind:'villa',w:7.6,h:9.2,d:6.2,x:baseX-4,z:34,rotY:Math.PI/2,showLabel:false}
+  ];
+}
+
+function getRoadsideSpots(dest){
+  const signature = (dest.label.length % 4) + 1;
+  const routeFrames = [94,82,72,60,48,38,26,14,2,-10,-22,-34,-46,-58,-70,-84];
+  return routeFrames.map((z, index)=>{
+    const side = index % 2 === 0 ? -1 : 1;
+    const offset = 18 + (index % 3) * 2 + signature;
+    const kindCycle = ['house','house','guesthouse','shop','villa','house'];
+    const kind = kindCycle[index % kindCycle.length];
+    const width = kind === 'villa' ? 8.4 : kind === 'guesthouse' ? 6.4 : kind === 'shop' ? 6.2 : 5.4;
+    const height = kind === 'villa' ? 9.8 : kind === 'guesthouse' ? 8.1 : kind === 'shop' ? 6.6 : 7.0;
+    const depth = kind === 'villa' ? 6.6 : kind === 'guesthouse' ? 5.2 : kind === 'shop' ? 4.8 : 4.6;
+    const labelPrefix = dest.label === 'Sigiriya' ? 'Roadside' : dest.label === 'Ella' ? 'Hill' : dest.label === 'Galle Fort' ? 'Fort' : dest.label === 'Kandy' ? 'Town' : dest.label === 'Yala' ? 'Outpost' : dest.label === 'Nuwara Eliya' ? 'Estate' : dest.label === 'Mirissa' ? 'Coast' : dest.label === 'Polonnaruwa' ? 'Heritage' : dest.label === 'Arugam Bay' ? 'Bay' : 'North';
+    const nameType = kind === 'house' ? 'Home' : kind === 'guesthouse' ? 'Guesthouse' : kind === 'shop' ? 'Shop' : 'Villa';
+    return {
+      name:`${labelPrefix} ${nameType} ${index + 1}`,
+      desc:`A small ${kind} placed along the route to make the settlement feel lived in.`,
+      kind,
+      w:width,
+      h:height,
+      d:depth,
+      x: side * (offset + (index % 2) * 1.8),
+      z,
+      rotY: side > 0 ? Math.PI / 2 : 0,
+      showLabel:false
+    };
+  });
+}
+
+const destinationKeys=Object.keys(destinationCatalog);
+destinationSelect.innerHTML=destinationKeys.map((key)=>`<option value="${key}">${destinationCatalog[key].label}</option>`).join('');
+
+const destinationGroup=new THREE.Group();
+scene.add(destinationGroup);
+const poiMarkers=[];
+let activeDestinationKey='sigiriya';
+
+function clearDestinationScene(){
+  while(destinationGroup.children.length) destinationGroup.remove(destinationGroup.children[0]);
+  poiMarkers.splice(0,poiMarkers.length).forEach((marker)=>marker.el.remove());
+}
+
+function makePoiLabel(spot){
+  const el=document.createElement('div');
+  el.className='poi-label';
+  el.innerHTML=`<span class="poi-pin"><span class="poi-dot"></span><span>${spot.name}</span></span><div class="poi-bubble">${spot.desc}</div>`;
+  poiLayer.appendChild(el);
+  return el;
+}
+
+function makeDestinationBuilding(spot,theme,index){
+  const g=new THREE.Group();
+  const kind=spot.kind||'house';
+  const bodyMat=new THREE.MeshLambertMaterial({color:spot.color||theme.body});
+  const roofMat=new THREE.MeshLambertMaterial({color:theme.roof});
+  const bodyScale = kind==='hall' ? 1.25 : kind==='tower' ? 0.85 : 1;
+  const body=new THREE.Mesh(new THREE.BoxGeometry(spot.w*bodyScale,spot.h,spot.d*bodyScale),bodyMat);
+  body.position.y=spot.h/2;
+  body.castShadow=true;
+  body.receiveShadow=true;
+  g.add(body);
+
+  if(kind==='house'||kind==='villa'||kind==='guesthouse'||kind==='shop'){
+    const roof=new THREE.Mesh(new THREE.ConeGeometry(Math.max(spot.w,spot.d)*0.62,Math.max(2.0,spot.h*0.34),4),roofMat);
+    roof.rotation.y=Math.PI/4;
+    roof.position.y=spot.h+Math.max(1.0,spot.h*0.14);
+    roof.castShadow=true;
+    g.add(roof);
+  } else if(kind==='temple'){
+    const roof=new THREE.Mesh(new THREE.ConeGeometry(Math.max(spot.w,spot.d)*0.55,Math.max(3.0,spot.h*0.42),6),roofMat);
+    roof.rotation.y=Math.PI/6;
+    roof.position.y=spot.h+Math.max(1.3,spot.h*0.2);
+    roof.castShadow=true;
+    g.add(roof);
+  } else if(kind==='tower'){
+    const tower=new THREE.Mesh(new THREE.CylinderGeometry(spot.w*0.24,spot.w*0.3,spot.h*0.7,8),roofMat);
+    tower.position.y=spot.h*0.85;
+    tower.castShadow=true;
+    g.add(tower);
+  } else {
+    const roof=new THREE.Mesh(new THREE.ConeGeometry(Math.max(spot.w,spot.d)*0.62,Math.max(2.2,spot.h*0.34),4),roofMat);
+    roof.rotation.y=Math.PI/4;
+    roof.position.y=spot.h+Math.max(1.1,spot.h*0.15);
+    roof.castShadow=true;
+    g.add(roof);
+  }
+
+  const sign=new THREE.Mesh(new THREE.BoxGeometry(spot.w*0.72,0.16,0.18),new THREE.MeshLambertMaterial({color:theme.accent}));
+  sign.position.set(0,spot.h*0.42,spot.d/2+0.1);
+  g.add(sign);
+
+  const door=new THREE.Mesh(new THREE.BoxGeometry(spot.w*0.18,spot.h*0.34,0.12),new THREE.MeshLambertMaterial({color:0x29150e}));
+  door.position.set(0,spot.h*0.17,spot.d/2+0.08);
+  g.add(door);
+
+  const windowMat=new THREE.MeshLambertMaterial({color:0xd9f2ff,emissive:0xbcecff,emissiveIntensity:0.22});
+  const windowOffsets=[[-spot.w*0.24,spot.h*0.45],[spot.w*0.24,spot.h*0.45],[-spot.w*0.24,spot.h*0.62],[spot.w*0.24,spot.h*0.62]];
+  windowOffsets.forEach(([x,y])=>{
+    const win=new THREE.Mesh(new THREE.BoxGeometry(spot.w*0.1,spot.h*0.09,0.05),windowMat);
+    win.position.set(x,y,spot.d/2+0.03);
+    g.add(win);
+  });
+
+  if(kind==='shop'){
+    const awning=new THREE.Mesh(new THREE.BoxGeometry(spot.w*1.02,0.22,spot.d*0.24),new THREE.MeshLambertMaterial({color:theme.accent}));
+    awning.position.set(0,spot.h*0.7,spot.d/2+0.06);
+    g.add(awning);
+  } else {
+    const roofBase=new THREE.Mesh(new THREE.BoxGeometry(spot.w*0.98,0.12,spot.d*0.98),new THREE.MeshLambertMaterial({color:theme.roof}));
+    roofBase.position.y=spot.h+0.05;
+    g.add(roofBase);
+  }
+
+  g.position.set(spot.x,0,spot.z);
+  g.rotation.y=spot.rotY||0;
+  destinationGroup.add(g);
+
+  if(spot.showLabel!==false){
+    const markerEl=makePoiLabel(spot);
+    poiMarkers.push({el:markerEl,mesh:g,spot});
+  }
+}
+
+function spawnDestinationScene(key){
+  activeDestinationKey=key;
+  const dest=destinationCatalog[key];
+  clearDestinationScene();
+  const combinedSpots=[...dest.spots,...getSettlementSpots(dest),...getRoadsideSpots(dest)];
+  const labeledSpots=combinedSpots.filter((spot)=>spot.showLabel!==false);
+  destinationSpotsEl.innerHTML=labeledSpots.map((spot)=>`<button type="button" class="spot-chip"><span>${spot.name}</span><div class="poi-bubble">${spot.desc}</div></button>`).join('');
+  combinedSpots.forEach((spot,index)=>{
+    const offsetZ=spot.z|| (86 - index*16);
+    makeDestinationBuilding({...spot,z:offsetZ},dest.theme,index);
+  });
+  missionEl.textContent=dest.mission;
+}
+
+destinationSelect.addEventListener('change',(e)=>spawnDestinationScene(e.target.value));
+spawnDestinationScene(activeDestinationKey);
+
+// --- Car (procedural) ---
+const carGroup=new THREE.Group();
+
+function carBox(w,h,d,x,y,z,col){
+  const g=new THREE.BoxGeometry(w,h,d);
+  const m=new THREE.Mesh(g,new THREE.MeshLambertMaterial({color:col}));
+  m.position.set(x,y,z);
+  m.castShadow=true;
+  carGroup.add(m);
+  return m;
+}
+
+carBox(2.4,.55,4.8,0,.275,0,0x1a3a8a);
+carBox(1.9,.7,2.4,0,.825,.2,0x1a3a8a);
+
+const windshield=new THREE.Mesh(new THREE.PlaneGeometry(1.7,.7),new THREE.MeshLambertMaterial({color:0x88aacc,transparent:true,opacity:.6}));
+windshield.position.set(0,1.0,.8);
+windshield.rotation.x=-Math.PI*.15;
+carGroup.add(windshield);
+
+const frontWind=new THREE.Mesh(new THREE.PlaneGeometry(1.7,.6),new THREE.MeshLambertMaterial({color:0x88aacc,transparent:true,opacity:.5}));
+frontWind.position.set(0,.95,-.6);
+frontWind.rotation.x=Math.PI*.15;
+carGroup.add(frontWind);
+
+[[1.15,.22,1.8],[-1.15,.22,1.8],[1.15,.22,-1.8],[-1.15,.22,-1.8]].forEach(([wx,wy,wz])=>{
+  const wg=new THREE.Group();
+  const tyre=new THREE.Mesh(new THREE.TorusGeometry(.32,.12,8,16),new THREE.MeshLambertMaterial({color:0x111111}));
+  tyre.rotation.y=Math.PI/2;
+  wg.add(tyre);
+  const rim=new THREE.Mesh(new THREE.CylinderGeometry(.18,.18,.06,8),new THREE.MeshLambertMaterial({color:0xcccccc}));
+  rim.rotation.z=Math.PI/2;
+  wg.add(rim);
+  wg.position.set(wx,wy,wz);
+  carGroup.add(wg);
+});
+
+const headL=new THREE.PointLight(0xffe8b0,1.8,18);
+headL.position.set(.6,.4,-2.5);
+carGroup.add(headL);
+const headR=new THREE.PointLight(0xffe8b0,1.8,18);
+headR.position.set(-.6,.4,-2.5);
+carGroup.add(headR);
+
+carGroup.position.set(-2,0,80);
+scene.add(carGroup);
+
+// Wheels refs for spin
+const wheels=[];
+carGroup.children.forEach(c=>{if(c.isGroup)wheels.push(c)});
+
+// Try to load a real car OBJ from `3d/OBJ/` and replace procedural car when available
+try{
+  const objLoader = new THREE.OBJLoader();
+  objLoader.load('OBJ/SportsCar.obj', (obj)=>{
+    // remove procedural parts
+    while(carGroup.children.length) carGroup.remove(carGroup.children[0]);
+    // normalize size
+    const bbox=new THREE.Box3().setFromObject(obj);
+    const size=bbox.getSize(new THREE.Vector3());
+    const desiredH=1.2;
+    const s=desiredH/Math.max(size.y,0.0001);
+    obj.scale.setScalar(s);
+    obj.traverse(ch=>{if(ch.isMesh){ch.castShadow=true;ch.receiveShadow=true;}});
+    carGroup.add(obj);
+    carModel=obj;
+  }, undefined, (err)=>{console.warn('car OBJ load failed',err);});
+}catch(e){console.warn('OBJLoader not available',e);}
+
+// --- Player state ---
+const player={x:-2,z:80,angle:Math.PI,speed:0,steer:0};
+const keys={f:false,b:false,l:false,r:false};
+
+window.addEventListener('keydown',e=>{
+  if(e.code==='KeyW'||e.code==='ArrowUp')keys.f=true;
+  if(e.code==='KeyS'||e.code==='ArrowDown')keys.b=true;
+  if(e.code==='KeyA'||e.code==='ArrowLeft')keys.l=true;
+  if(e.code==='KeyD'||e.code==='ArrowRight')keys.r=true;
+  e.preventDefault&&(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))&&e.preventDefault();
+});
+window.addEventListener('keyup',e=>{
+  if(e.code==='KeyW'||e.code==='ArrowUp')keys.f=false;
+  if(e.code==='KeyS'||e.code==='ArrowDown')keys.b=false;
+  if(e.code==='KeyA'||e.code==='ArrowLeft')keys.l=false;
+  if(e.code==='KeyD'||e.code==='ArrowRight')keys.r=false;
+});
+
+document.querySelectorAll('.d-btn').forEach(btn=>{
+  const k=btn.dataset.k;
+  btn.addEventListener('pointerdown',()=>{keys[k]=true;btn.classList.add('on')});
+  btn.addEventListener('pointerup',()=>{keys[k]=false;btn.classList.remove('on')});
+  btn.addEventListener('pointerleave',()=>{keys[k]=false;btn.classList.remove('on')});
+  btn.addEventListener('pointercancel',()=>{keys[k]=false;btn.classList.remove('on')});
+});
+
+// Camera follow
+const camOffset=new THREE.Vector3(0,6,14);
+const camTarget=new THREE.Vector3();
+const camPos=new THREE.Vector3(-2,6,94);
+
+// Resize
+function resize(){
+  renderer.setSize(innerWidth,innerHeight);
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+}
+resize();
+window.addEventListener('resize',resize);
+
+// Zone
+function getZone(z){
+  if(z>50)return'Trail Start';
+  if(z>10)return'Bamboo Pass';
+  if(z>-40)return'Hidden Valley';
+  if(z>-80)return'Shrine Road';
+  return'Shrine Approach';
+}
+
+let lastZone='';
+let lastT=performance.now();
+let shrineGlowing=false;
+
+function tick(now){
+  requestAnimationFrame(tick);
+  const dt=Math.min((now-lastT)/1000,.04);
+  lastT=now;
+  const t=now*.001;
+
+  // Physics
+  const acc=14,brk=18,drag=9,maxF=16,maxR=-6;
+  const thr=(keys.f?1:0)-(keys.b?1:0);
+  if(thr>0)player.speed+=acc*dt;
+  else if(thr<0)player.speed-=brk*dt;
+  else player.speed+=(player.speed>0?-1:1)*Math.min(Math.abs(player.speed),drag*dt);
+  player.speed=Math.max(maxR,Math.min(maxF,player.speed));
+
+  const si=(keys.l?-1:0)+(keys.r?1:0);
+  player.steer+=(si-player.steer)*Math.min(1,dt*10);
+  const sf=Math.min(1,Math.abs(player.speed)/6)*1.8;
+  player.angle+=player.steer*sf*dt*(player.speed>=0?1:-1);
+
+  player.x+=Math.sin(player.angle)*player.speed*dt;
+  player.z+=Math.cos(player.angle)*player.speed*dt;
+  player.x=Math.max(-80,Math.min(80,player.x));
+  player.z=Math.max(-115,Math.min(90,player.z));
+
+  // Car mesh
+  carGroup.position.set(player.x,.02,player.z);
+  carGroup.rotation.y=player.angle;
+  const spd=Math.abs(player.speed);
+  wheels.forEach(w=>{w.rotation.x+=player.speed*dt*2;});
+
+  // Headlights follow car
+  rimLight.position.set(player.x-10,8,player.z-5);
+
+  // Camera
+  const back=new THREE.Vector3(Math.sin(player.angle),0,Math.cos(player.angle));
+  const desired=new THREE.Vector3(
+    player.x+back.x*12,
+    3.5+spd*.12,
+    player.z+back.z*12
+  );
+  camPos.lerp(desired,dt*5.5);
+  camera.position.copy(camPos);
+  camTarget.set(player.x,1.2,player.z);
+  camera.lookAt(camTarget);
+
+  // Relics
+  relicMeshes.forEach(r=>{
+    if(relicCollected[r.idx])return;
+    r.group.rotation.y=t*1.8+r.idx;
+    r.group.position.y=1.4+Math.sin(t*2+r.idx*.8)*.2;
+    const dx=player.x-r.group.position.x;
+    const dz=player.z-r.group.position.z;
+    if(Math.hypot(dx,dz)<2.4){
+      relicCollected[r.idx]=true;
+      totalCollected++;
+      r.group.visible=false;
+      relicCtEl.textContent=totalCollected+' / 5';
+      if(totalCollected===5){
+        missionEl.textContent='All relics found! Drive to the shrine at the end of the trail.';
+        finishEl.classList.add('show');
+        if(scene._shrineLight)scene._shrineLight.intensity=4;
+        shrineGlowing=true;
+      }
+    }
+  });
+
+  // Shrine glow pulse
+  if(shrineGlowing&&scene._shrineLight){
+    scene._shrineLight.intensity=3+Math.sin(t*3)*1.2;
+  }
+
+  // Zone
+  const zone=getZone(player.z);
+  if(zone!==lastZone){lastZone=zone;zoneEl.textContent=zone;}
+
+  // Speed
+  speedEl.textContent=Math.round(spd*3.6)+' km/h';
+
+  // Project destination labels into screen space
+  const rect=renderer.domElement.getBoundingClientRect();
+  poiMarkers.forEach((marker)=>{
+    const labelPos=marker.mesh.localToWorld(new THREE.Vector3(0,marker.spot.h+2.1,0));
+    const projected=labelPos.clone().project(camera);
+    const visible=projected.z>-1&&projected.z<1;
+    if(!visible){
+      marker.el.classList.remove('visible');
+      return;
+    }
+    const x=(projected.x*.5+.5)*rect.width+rect.left;
+    const y=(-projected.y*.5+.5)*rect.height+rect.top;
+    marker.el.style.left=x+'px';
+    marker.el.style.top=y+'px';
+    marker.el.classList.add('visible');
+  });
+
+  renderer.render(scene,camera);
+}
+requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

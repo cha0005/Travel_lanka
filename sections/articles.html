@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Research & Portal - Tourism Sri Lanka</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="articles.css" />
+  <link rel="icon" type="image/png" href="../favicon_io/favicon.png?v=2">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="tourism-in">Tourism In</span> <span class="sri-lanka">Sri Lanka</span>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="destinations.html">Destination</a>
+      <a href="articles.html" class="active">Article</a>
+      <a href="#">About Us</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+
+  <main class="articles-main">
+    <!-- HERO SECTION -->
+    <section class="articles-hero">
+      <div class="hero-content">
+        <h1>Research & Portal</h1>
+        <p>Access curated insights, scholarly articles, and luxury travel guides designed for the discerning explorer of the Pearl of the Indian Ocean.</p>
+        
+        <div class="search-container">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="8" cy="8" r="6" stroke="#999" stroke-width="2"/>
+            <path d="M12 12l6 6" stroke="#999" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input type="text" class="search-input" placeholder="Search for biodiversity reports, architectural history, or tea estate guides...">
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT SECTION -->
+    <section class="articles-content">
+      <!-- SIDEBAR -->
+      <aside class="articles-sidebar">
+        <div class="filter-section">
+          <h3>Filter Content</h3>
+          <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">
+              <span class="filter-icon">⊞</span>
+              All Resources
+            </button>
+            <button class="filter-btn" data-filter="articles">
+              <span class="filter-icon">📄</span>
+              Articles
+            </button>
+            <button class="filter-btn" data-filter="pdfs">
+              <span class="filter-icon">📕</span>
+              PDFs
+            </button>
+            <button class="filter-btn" data-filter="documents">
+              <span class="filter-icon">📋</span>
+              Documents
+            </button>
+            <button class="filter-btn" data-filter="images">
+              <span class="filter-icon">🖼️</span>
+              Images
+            </button>
+          </div>
+        </div>
+
+        <div class="tags-section">
+          <h3>Popular Tags</h3>
+          <div class="tags-group">
+            <a href="#" class="tag">History</a>
+            <a href="#" class="tag">Wildlife</a>
+            <a href="#" class="tag">Architecture</a>
+            <a href="#" class="tag">Cuisine</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT GRID -->
+      <div class="articles-container">
+        <!-- ARTICLE 1 -->
+        <article class="content-card article-card" data-type="articles">
+          <div class="card-image" style="background-image: url('../images_desitinations/image-place-1.jpg')">
+            <span class="card-badge">Article</span>
+          </div>
+          <div class="card-content">
+            <p class="card-category">Historical Archives</p>
+            <h3>The Sacred Architecture of Anuradhapura</h3>
+            <p class="card-description">A comprehensive 45-page deep dive into the engineering marvels and spiritual significance of ancient temples.</p>
+            <div class="card-meta">
+              <span>8 min read</span>
+            </div>
+            <a href="https://en.wikipedia.org/wiki/Anuradhapura" class="card-link" target="_blank" rel="noopener">Read Online →</a>
+          </div>
+        </article>
+
+        <!-- ARTICLE 2 -->
+        <article class="content-card article-card" data-type="articles">
+          <div class="card-image" style="background-image: url('../images_desitinations/image-place-6.jpg')">
+            <span class="card-badge">Article</span>
+          </div>
+          <div class="card-content">
+            <p class="card-category">Culinary Heritage</p>
+            <h3>The Alchemy of Ceylon Tea</h3>
+            <p class="card-description">Understanding the terroir, elevation, and artisanal processes that define the world's finest tea.</p>
+            <div class="card-meta">
+              <span>8 min read</span>
+            </div>
+            <a href="https://en.wikipedia.org/wiki/Ceylon_tea" class="card-link" target="_blank" rel="noopener">Read Online →</a>
+          </div>
+        </article>
+
+        <!-- ARTICLE 3 -->
+        <article class="content-card article-card" data-type="articles">
+          <div class="card-image" style="background-image: url('../images_desitinations/image-place-4.jpg')">
+            <span class="card-badge">PDF</span>
+          </div>
+          <div class="card-content">
+            <p class="card-category">Visual Assets</p>
+            <h3>Sigiriya: 4K Panoramic Gallery</h3>
+            <p class="card-description">A curated collection of high-resolution professional photography capturing the ancient fortress.</p>
+            <div class="card-meta">
+              <span>12 High-Res Assets</span>
+            </div>
+            <a href="https://en.wikipedia.org/wiki/Sigiriya" class="card-link" target="_blank" rel="noopener">Read Online →</a>
+          </div>
+        </article>
+
+        <!-- ARTICLE 4 -->
+        <article class="content-card article-card" data-type="documents">
+          <div class="card-image" style="background-image: url('../images_desitinations/image-place-5.jpg')">
+            <span class="card-badge">Docs</span>
+          </div>
+          <div class="card-content">
+            <p class="card-category">Itinerary Template</p>
+            <h3>The Bawa Architectural Trail</h3>
+            <p class="card-description">An editable planning document for travelers wishing to visit the masterpieces of this visionary architect.</p>
+            <div class="card-meta">
+              <span>246 KB • Editable</span>
+            </div>
+            <a href="https://en.wikipedia.org/wiki/Geoffrey_Bawa" class="card-link" target="_blank" rel="noopener">Read Online →</a>
+          </div>
+        </article>
+
+        <!-- ARTICLE 5 -->
+        <article class="content-card article-card" data-type="articles">
+          <div class="card-image" style="background-image: url('../images_desitinations/image-place-3.jpg')">
+            <span class="card-badge">Article</span>
+          </div>
+          <div class="card-content">
+            <p class="card-category">Wildlife Insights</p>
+            <h3>Biodiversity & Conservation in Yala National Park</h3>
+            <p class="card-description">Comprehensive guide to the endangered species and ecological importance of Sri Lanka's premier wildlife sanctuary.</p>
+            <div class="card-meta">
+              <span>12 min read</span>
+            </div>
+            <a href="https://en.wikipedia.org/wiki/Yala_National_Park" class="card-link" target="_blank" rel="noopener">Read Online →</a>
+          </div>
+        </article>
+
+        <!-- ARTICLE 6 -->
+        <article class="content-card article-card" data-type="images">
+          <div class="card-image" style="background-image: url('../images_desitinations/image-place-2.jpg')">
+            <span class="card-badge">Image Kit</span>
+          </div>
+          <div class="card-content">
+            <p class="card-category">Photography Collection</p>
+            <h3>Ella's Mystical Highlands: Photo Essay</h3>
+            <p class="card-description">Stunning collection of landscape and cultural photography showcasing the scenic mountain region.</p>
+            <div class="card-meta">
+              <span>45 Premium Photos</span>
+            </div>
+            <a href="https://en.wikipedia.org/wiki/Ella,_Sri_Lanka" class="card-link" target="_blank" rel="noopener">Read Online →</a>
+          </div>
+        </article>
+
+        <!-- ARTICLE 7 -->
+        <article class="content-card article-card" data-type="pdfs">
+          <div class="card-image" style="background-image: url('../images_desitinations/image-place-9.jpg')">
+            <span class="card-badge">PDF</span>
+          </div>
+          <div class="card-content">
+            <p class="card-category">Research Report</p>
+            <h3>Coastal Erosion & Marine Conservation Strategy</h3>
+            <p class="card-description">Technical research paper on beach preservation and sustainable tourism development along the southern coast.</p>
+            <div class="card-meta">
+              <span>3.2 MB • 28 Pages</span>
+            </div>
+            <a href="https://en.wikipedia.org/wiki/Coastal_erosion" class="card-link" target="_blank" rel="noopener">Read Online →</a>
+          </div>
+        </article>
+
+        <!-- ARTICLE 8 -->
+        <article class="content-card article-card" data-type="articles">
+          <div class="card-image" style="background-image: url('../images_desitinations/image-place-10.jpg')">
+            <span class="card-badge">Article</span>
+          </div>
+          <div class="card-content">
+            <p class="card-category">Cultural Heritage</p>
+            <h3>The Jaffna Peninsula: History & Sacred Sites</h3>
+            <p class="card-description">In-depth exploration of the northern frontier's unique cultural identity and historically significant temples.</p>
+            <div class="card-meta">
+              <span>10 min read</span>
+            </div>
+            <a href="https://en.wikipedia.org/wiki/Jaffna_Peninsula" class="card-link" target="_blank" rel="noopener">Read Online →</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer" class="footer">
+    <div class="footer-cols">
+      <div>
+        <h4>About Sri Lanka</h4>
+        <p>
+          Sri Lanka is a tropical paradise offering rich culture, wildlife adventures,
+          scenic landscapes, and unforgettable experiences.
+        </p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <a href="../index.html">Home</a>
+        <a href="#">About Us</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="articles.html">Articles</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <div>
+        <h4>Contact Info</h4>
+        <p>Email: info@tourismsrilanka.com</p>
+        <p>Phone: +94 78 123 4567</p>
+      </div>
+    </div>
+
+    <p class="copyright">
+      © 2026 Tourism Sri Lanka. All rights reserved.
+    </p>
+  </footer>
+
+  <script src="articles.js"></script>
+</body>
+</html>

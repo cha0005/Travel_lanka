@@ -1,244 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hotels in Galle Fort | Tourism In Sri Lanka</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Galle Fort — Hotels | Tourism Sri Lanka</title>
   <link rel="icon" type="image/png" href="../favicon_io/favicon.png?v=2">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="destination-hotels.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#f7f5f0;color:#1a1a1a;line-height:1.6;}
+
+/* NAV */
+nav.topnav{width:100%;background:#f8f2fc;padding:12px 0;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.nav-logo{margin-left:36px;font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;}
+.nav-logo .green{color:#174c3c;}
+.nav-logo .gold{color:#e2b13c;}
+.nav-links{display:flex;gap:12px;margin-right:36px;}
+.nav-links a{font-family:'Playfair Display',serif;font-size:0.92rem;font-weight:500;color:#222;text-decoration:none;padding:6px 16px;border-radius:18px;background:#f3ecfa;transition:background .2s;}
+.nav-links a:hover{background:#e8dff5;}
+
+/* HERO */
+.page-hero{background:linear-gradient(135deg,#3a3a5a 0%,#3a3a5acc 100%);padding:56px 48px 48px;color:#fff;}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:400;margin-bottom:10px;}
+.page-hero p{font-size:1rem;opacity:0.85;max-width:560px;}
+
+/* HOTEL COUNT */
+.results-bar{display:flex;justify-content:space-between;align-items:center;padding:28px 48px 20px;}
+.results-bar h2{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;color:#1a1a1a;}
+.results-bar span{font-size:0.85rem;color:#666;}
+
+/* GRID — breathing space unlike booking.html */
+.hotels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;padding:0 48px 80px;}
+
+/* CARD */
+.hotel-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e8e2d9;box-shadow:0 2px 12px rgba(0,0,0,0.05);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;}
+.hotel-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,0.11);}
+.card-img{height:200px;overflow:hidden;background:#d0ccc4;position:relative;}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.hotel-card:hover .card-img img{transform:scale(1.05);}
+.card-stars{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.55);color:#f5c842;font-size:0.75rem;padding:4px 10px;border-radius:20px;letter-spacing:0.05em;}
+.card-body{padding:22px 22px 18px;flex:1;display:flex;flex-direction:column;}
+.card-body h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:500;color:#1a1a1a;margin-bottom:6px;}
+.card-body p{font-size:0.85rem;color:#555;line-height:1.6;flex:1;margin-bottom:14px;}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.tag{font-size:0.7rem;background:#f0ece6;color:#555;padding:3px 10px;border-radius:20px;}
+.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #f0ece6;}
+.price{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;color:#1a1a1a;}
+.book-btn{background:#1a3a2a;color:#fff;text-decoration:none;padding:9px 20px;border-radius:8px;font-size:0.78rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;transition:background .2s;}
+.book-btn:hover{background:#2d5a40;}
+
+/* FOOTER */
+footer{background:#222;padding:48px 48px 0;color:#ccc;}
+.footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;max-width:1400px;margin:0 auto;padding-bottom:48px;}
+footer h4{color:#fff;font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:10px;}
+footer p,footer a{font-size:0.9rem;line-height:1.7;color:#ccc;text-decoration:none;}
+footer ul{list-style:none;padding:0;}
+footer ul li{margin-bottom:5px;}
+.footer-bottom{text-align:center;font-size:0.78rem;color:#888;padding:20px 0;border-top:1px solid #444;}
+
+@media(max-width:1100px){.hotels-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:700px){.hotels-grid{grid-template-columns:1fr;padding:0 20px 60px;}.page-hero,.results-bar{padding-left:20px;padding-right:20px;}.nav-logo{margin-left:16px;}.nav-links{margin-right:16px;gap:6px;}.nav-links a{padding:5px 10px;font-size:0.82rem;}}
+</style>
 </head>
 <body>
 
-  <header class="navbar">
-    <div class="nav-left">
-      <span class="logo-text">
-        <span class="logo-green">Tourism In</span>
-        <span class="logo-gold"> Sri Lanka</span>
-      </span>
+<nav class="topnav">
+  <div class="nav-logo"><span class="green">Tourism In</span><span class="gold"> Sri Lanka</span></div>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../sections/destinations.html">Destination</a>
+    <a href="../sections/articles.html">Article</a>
+    <a href="#">About Us</a>
+    <a href="#footer">Contact</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1>Galle Fort</h1>
+  <p>Boutique stays inside and around Sri Lanka's colonial fortress</p>
+</div>
+
+<div class="results-bar">
+  <h2>Hotels &amp; Stays</h2>
+  <span>6 properties · Click any card to view on Google Hotels</span>
+</div>
+
+<div class="hotels-grid">
+  <div class="hotel-card">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Amangalla">
+      <span class="card-stars">★★★★★</span>
     </div>
-    <nav class="nav-links">
-      <a href="../index.html">Home</a>
-      <a href="../sections/destinations.html">Destination</a>
-      <a href="../sections/articles.html">Article</a>
-      <a href="#">About Us</a>
-      <a href="#footer">Contact</a>
-    </nav>
-  </header>
-
-  <main class="dest-hotels-page">
-
-    <!-- HERO -->
-    <section class="dest-hero" style="background-image: url('../images_desitinations/image-place-3.jpg');">
-      <div class="dest-hero-overlay"></div>
-      <div class="dest-hero-content">
-        <p class="dest-hero-eyebrow">Southern Province · Galle District</p>
-        <h1>Hotels &amp; Stays in <span class="accent">Galle Fort</span></h1>
-        <p class="dest-hero-sub">Colonial ramparts, cobbled lanes, and ocean-facing verandas — find your stay inside the old Dutch fort.</p>
-      </div>
-
-      <div class="dest-search-wrap">
-        <div class="dest-search-card">
-          <div class="dest-search-fields">
-            <div class="field">
-              <label>Location</label>
-              <div class="field-pill">Galle Fort, Sri Lanka</div>
-            </div>
-            <div class="field">
-              <label>Check In</label>
-              <div class="field-pill">05 Dec, 2025</div>
-            </div>
-            <div class="field">
-              <label>Check Out</label>
-              <div class="field-pill">10 Dec, 2025</div>
-            </div>
-            <div class="field">
-              <label>Travellers</label>
-              <div class="field-pill">2 Adults, 1 Room</div>
-            </div>
-            <button type="button" class="dest-search-btn">Search</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FILTERS -->
-    <section class="dest-filters" aria-label="Hotel filters">
-      <div class="dest-filters-inner">
-        <button class="filter-btn active" data-filter="all">All Stays</button>
-        <button class="filter-btn" data-filter="couples">Couples</button>
-        <button class="filter-btn" data-filter="families">Families</button>
-        <button class="filter-btn" data-filter="solo">Solo</button>
-        <button class="filter-btn" data-filter="adventures">Adventures</button>
-      </div>
-      <p class="dest-results-count" id="resultsCount">5 stays found</p>
-    </section>
-
-    <!-- HOTEL GRID -->
-    <section class="hotel-grid" id="hotelGrid">
-
-      <article class="hotel-card" data-tags="couples solo">
-        <div class="hotel-card-img">
-          <img src="../images_desitinations/galle-hotel-fort-rampart.jpg" alt="Fort Rampart Boutique Hotel">
-          <span class="hotel-badge">Editor's Pick</span>
-        </div>
-        <div class="hotel-card-body">
-          <div class="hotel-card-top">
-            <h3>Fort Rampart Boutique Hotel</h3>
-            <span class="hotel-rating">★ 4.9</span>
-          </div>
-          <p class="hotel-location">Inside the Fort Walls, Galle</p>
-          <p class="hotel-blurb">A restored colonial mansion steps from the ramparts, with a rooftop bar looking out to sea.</p>
-          <div class="hotel-card-bottom">
-            <span class="hotel-price"><strong>$220</strong> / night</span>
-            <a href="https://www.booking.com/searchresults.html?ss=Fort+Rampart+Boutique+Hotel+Galle+Fort+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="hotel-card" data-tags="couples">
-        <div class="hotel-card-img">
-          <img src="../images_desitinations/galle-hotel-lighthouse-point.jpg" alt="Lighthouse Point Suites">
-          <span class="hotel-badge">Ocean View</span>
-        </div>
-        <div class="hotel-card-body">
-          <div class="hotel-card-top">
-            <h3>Lighthouse Point Suites</h3>
-            <span class="hotel-rating">★ 4.8</span>
-          </div>
-          <p class="hotel-location">Near Galle Lighthouse, Galle Fort</p>
-          <p class="hotel-blurb">Sea-facing suites tucked beside the historic lighthouse, with sunset views over the ramparts.</p>
-          <div class="hotel-card-bottom">
-            <span class="hotel-price"><strong>$195</strong> / night</span>
-            <a href="https://www.booking.com/searchresults.html?ss=Lighthouse+Point+Suites+Galle+Fort+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="hotel-card" data-tags="couples solo">
-        <div class="hotel-card-img">
-          <img src="../images_desitinations/galle-hotel-dutch-quarter.jpg" alt="Dutch Quarter Heritage Villa">
-          <span class="hotel-badge">Heritage Stay</span>
-        </div>
-        <div class="hotel-card-body">
-          <div class="hotel-card-top">
-            <h3>Dutch Quarter Heritage Villa</h3>
-            <span class="hotel-rating">★ 4.7</span>
-          </div>
-          <p class="hotel-location">Church Street, Galle Fort</p>
-          <p class="hotel-blurb">A 17th-century villa with original teak floors, a shaded courtyard, and antique Dutch furnishings.</p>
-          <div class="hotel-card-bottom">
-            <span class="hotel-price"><strong>$175</strong> / night</span>
-            <a href="https://www.booking.com/searchresults.html?ss=Dutch+Quarter+Heritage+Villa+Galle+Fort+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="hotel-card" data-tags="solo">
-        <div class="hotel-card-img">
-          <img src="../images_desitinations/galle-hotel-harbour-backpackers.jpg" alt="Galle Harbour Backpackers">
-        </div>
-        <div class="hotel-card-body">
-          <div class="hotel-card-top">
-            <h3>Galle Harbour Backpackers</h3>
-            <span class="hotel-rating">★ 4.3</span>
-          </div>
-          <p class="hotel-location">Near the Old Harbour, Galle Fort</p>
-          <p class="hotel-blurb">Simple, friendly dorms and private rooms a short walk from the ramparts and Fort's cafes.</p>
-          <div class="hotel-card-bottom">
-            <span class="hotel-price"><strong>$28</strong> / night</span>
-            <a href="https://www.booking.com/searchresults.html?ss=Galle+Harbour+Backpackers+Galle+Fort+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="hotel-card" data-tags="families couples">
-        <div class="hotel-card-img">
-          <img src="../images_desitinations/galle-hotel-turtle-bay.jpg" alt="Turtle Bay Family Resort">
-        </div>
-        <div class="hotel-card-body">
-          <div class="hotel-card-top">
-            <h3>Turtle Bay Family Resort</h3>
-            <span class="hotel-rating">★ 4.6</span>
-          </div>
-          <p class="hotel-location">Unawatuna Road, just outside Galle Fort</p>
-          <p class="hotel-blurb">Beachfront resort with a shallow lagoon pool, five minutes' drive from the Fort's gates.</p>
-          <div class="hotel-card-bottom">
-            <span class="hotel-price"><strong>$140</strong> / night</span>
-            <a href="https://www.booking.com/searchresults.html?ss=Turtle+Bay+Family+Resort+Galle+Sri+Lanka" class="hotel-view-btn" target="_blank" rel="noopener noreferrer">View Hotel</a>
-          </div>
-        </div>
-      </article>
-
-    </section>
-
-  </main>
-
-  <footer id="footer" class="footer">
-    <div class="footer-grid">
-      <div>
-        <p>Travel makes one modest, you see what a tiny place you occupy in the world. Explore Sri Lanka and create memories that last a lifetime.</p>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="destinations.html">Destinations</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Careers</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>For Travellers</h4>
-        <ul>
-          <li><a href="#">Why us</a></li>
-          <li><a href="#">Why Touring</a></li>
-          <li><a href="#">Share your review</a></li>
-          <li><a href="#">Travel Insurance</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact Info</h4>
-        <p>+94786480244</p>
-        <p>Sri Lanka</p>
-        <p>support@tourisminsrilanka.com</p>
+    <div class="card-body">
+      <h3>Amangalla</h3>
+      <p>Sri Lanka's most celebrated heritage hotel, set inside the Fort walls in a 300-year-old Dutch building.</p>
+      <div class="card-tags"><span class="tag">Heritage</span><span class="tag">Inside Fort</span><span class="tag">Iconic</span></div>
+      <div class="card-footer">
+        <span class="price">From $750/night</span>
+        <a class="book-btn" href="https://www.google.com/travel/hotels/search?q=Amangalla+Galle+Fort" target="_blank" rel="noopener">View Hotel</a>
       </div>
     </div>
-    <div class="copyright">Copyright © 2023 Tourism In Sri Lanka</div>
-  </footer>
+  </div>
+  <div class="hotel-card">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600&q=80" alt="Fort Bazaar">
+      <span class="card-stars">★★★★★</span>
+    </div>
+    <div class="card-body">
+      <h3>Fort Bazaar</h3>
+      <p>Beautifully restored colonial townhouse on Church Street with a rooftop pool and bespoke service.</p>
+      <div class="card-tags"><span class="tag">Rooftop Pool</span><span class="tag">Colonial</span><span class="tag">Boutique</span></div>
+      <div class="card-footer">
+        <span class="price">From $420/night</span>
+        <a class="book-btn" href="https://www.google.com/travel/hotels/search?q=Fort+Bazaar+Galle" target="_blank" rel="noopener">View Hotel</a>
+      </div>
+    </div>
+  </div>
+  <div class="hotel-card">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1540541338537-1220059af2a9?w=600&q=80" alt="The Galle Fort Hotel">
+      <span class="card-stars">★★★★★</span>
+    </div>
+    <div class="card-body">
+      <h3>The Galle Fort Hotel</h3>
+      <p>Elegant restored Dutch merchant house inside the Fort with a courtyard pool and spa.</p>
+      <div class="card-tags"><span class="tag">Courtyard Pool</span><span class="tag">Dutch Heritage</span><span class="tag">Spa</span></div>
+      <div class="card-footer">
+        <span class="price">From $390/night</span>
+        <a class="book-btn" href="https://www.google.com/travel/hotels/search?q=The+Galle+Fort+Hotel" target="_blank" rel="noopener">View Hotel</a>
+      </div>
+    </div>
+  </div>
+  <div class="hotel-card">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80" alt="Jetwing Lighthouse">
+      <span class="card-stars">★★★★★</span>
+    </div>
+    <div class="card-body">
+      <h3>Jetwing Lighthouse</h3>
+      <p>Geoffrey Bawa-designed clifftop resort just outside the Fort with dramatic ocean views.</p>
+      <div class="card-tags"><span class="tag">Ocean Views</span><span class="tag">Bawa Design</span><span class="tag">Clifftop</span></div>
+      <div class="card-footer">
+        <span class="price">From $280/night</span>
+        <a class="book-btn" href="https://www.google.com/travel/hotels/search?q=Jetwing+Lighthouse+Galle" target="_blank" rel="noopener">View Hotel</a>
+      </div>
+    </div>
+  </div>
+  <div class="hotel-card">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80" alt="Cinnamon House Galle">
+      <span class="card-stars">★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <h3>Cinnamon House Galle</h3>
+      <p>Intimate boutique villa inside the Fort with characterful rooms and a lovely garden terrace.</p>
+      <div class="card-tags"><span class="tag">Boutique</span><span class="tag">Fort Location</span><span class="tag">Garden</span></div>
+      <div class="card-footer">
+        <span class="price">From $195/night</span>
+        <a class="book-btn" href="https://www.google.com/travel/hotels/search?q=Cinnamon+House+Galle+Fort" target="_blank" rel="noopener">View Hotel</a>
+      </div>
+    </div>
+  </div>
+  <div class="hotel-card">
+    <div class="card-img">
+      <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&q=80" alt="Unawatuna Beach Resort">
+      <span class="card-stars">★★★★☆</span>
+    </div>
+    <div class="card-body">
+      <h3>Unawatuna Beach Resort</h3>
+      <p>Relaxed beachfront resort at Unawatuna Bay, 3 km from the Fort with direct beach access.</p>
+      <div class="card-tags"><span class="tag">Beachfront</span><span class="tag">3km to Fort</span><span class="tag">Pool</span></div>
+      <div class="card-footer">
+        <span class="price">From $145/night</span>
+        <a class="book-btn" href="https://www.google.com/travel/hotels/search?q=Unawatuna+Beach+Resort" target="_blank" rel="noopener">View Hotel</a>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    (function () {
-      const filterButtons = document.querySelectorAll('.filter-btn');
-      const cards = document.querySelectorAll('.hotel-card');
-      const countLabel = document.getElementById('resultsCount');
+</div>
 
-      function updateCount(filter) {
-        const visible = filter === 'all'
-          ? cards.length
-          : Array.from(cards).filter(c => (c.getAttribute('data-tags') || '').includes(filter)).length;
-        countLabel.textContent = `${visible} stay${visible === 1 ? '' : 's'} found`;
-      }
+<footer id="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>About Sri Lanka</h4>
+      <p>Sri Lanka is a tropical paradise offering rich culture, wildlife adventures, scenic landscapes, and unforgettable experiences for every traveller.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../sections/destinations.html">Destinations</a></li>
+        <li><a href="../sections/articles.html">Articles</a></li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact Info</h4>
+      <p>Email: info@tourismsrilanka.com<br>Phone: +94 78 123 4567<br>Sri Lanka</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Tourism Sri Lanka. All rights reserved.</div>
+</footer>
 
-      filterButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          filterButtons.forEach((item) => item.classList.remove('active'));
-          btn.classList.add('active');
-
-          const filter = btn.getAttribute('data-filter');
-
-          cards.forEach((card) => {
-            const tags = card.getAttribute('data-tags') || '';
-            card.style.display = (filter === 'all' || tags.includes(filter)) ? 'flex' : 'none';
-          });
-
-          updateCount(filter);
-        });
-      });
-    })();
-  </script>
 </body>
 </html>
